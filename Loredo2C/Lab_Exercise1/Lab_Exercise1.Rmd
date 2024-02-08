@@ -1,0 +1,49 @@
+---
+title: "Lab_Exercise1"
+author: "Natalie Joy Loredo"
+date: "2024-02-08"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+  library(rvest)
+  library(polite)
+
+url1 <- "https://www.amazon.com/s/?_encoding=UTF8&k=gaming%20keyboard&ref=nb_sb_noss_1&pd_rd_w=T04Nv&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=56SNZPE44Q32Z0W03NZK&pd_rd_wg=fSVtA&pd_rd_r=3d8196e4-a2bc-4db2-a406-35f833497e00&ref_=pd_gw_unk"
+
+session1 <- bow(url1, user_agent = "Educational Purposes")
+
+keyboad_url1 <- read_html(url1)
+
+```
+#Scrape the Name of the Product
+```{r}
+
+keyboadName1 <- keyboad_url1 %>%
+  html_nodes("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2") %>%
+  html_text  
+keyboadName1
+
+```
+#Scrape the Price
+```{r}
+keyboadPrice1 <- mouse_url1 %>%
+  html_nodes("") %>%
+  html_text()
+
+keyboadPrice1
+
+```
+#Scrape the Ratings
+```{r}
+  
+```
+#Scrape the Total No. of Reviews
+```{r}
+   
+
