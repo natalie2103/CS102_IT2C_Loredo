@@ -13,26 +13,28 @@ knitr::opts_chunk$set(echo = TRUE)
 
   library(rvest)
   library(polite)
+  library(httr)
+  library(dplyr)
 
-url1 <- "https://www.amazon.com/s/?_encoding=UTF8&k=gaming%20keyboard&ref=nb_sb_noss_1&pd_rd_w=T04Nv&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=56SNZPE44Q32Z0W03NZK&pd_rd_wg=fSVtA&pd_rd_r=3d8196e4-a2bc-4db2-a406-35f833497e00&ref_=pd_gw_unk"
-
-session1 <- bow(url1, user_agent = "Educational Purposes")
-
-keyboad_url1 <- read_html(url1)
-
+url1 <- "https://www.amazon.com/s?k=gaming+keyboard&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=e3298ce5-274c-4a84-bef0-2e6b17f5614d&pd_rd_w=ORmrN&pd_rd_wg=5GB7v&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=76D1QRTBMD0VDYY442YN&ref=pd_gw_unk"
+  session <- bow (url1, user_agent="Educational Purposes")
+  session
+ 
+  session_page <- scrape(session)
 ```
 #Scrape the Name of the Product
 ```{r}
-
-keyboadName1 <- keyboad_url1 %>%
-  html_nodes("h2.a-size-mini.a-spacing-none.a-color-base.s-line-clamp-2") %>%
-  html_text  
+keyboadName1_url1 <- read_html(url1)
+  
+keyboadName1 <- keyboadName1_url1 %>%
+  html_nodes("span.a-size-medium.a-color-base.a-text-normal") %>%
+  html_text()
 keyboadName1
 
 ```
 #Scrape the Price
 ```{r}
-keyboadPrice1 <- mouse_url1 %>%
+keyboadPrice1 <- keyboadPrice1_url1 %>%
   html_nodes("") %>%
   html_text()
 
