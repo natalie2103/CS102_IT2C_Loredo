@@ -22,30 +22,41 @@ url1 <- "https://www.amazon.com/s?k=gaming+keyboard&_encoding=UTF8&content-id=am
  
   session_page <- scrape(session)
 ```
-#Scrape the Name of the Product
 ```{r}
-keyboadName1_url1 <- read_html(url1)
-  
-keyboadName1 <- keyboadName1_url1 %>%
-  html_nodes("span.a-size-medium.a-color-base.a-text-normal") %>%
-  html_text()
+keyboad_url1 <- read_html(url1)
+
+#Scrape for the Name of the Product
+keyboadName1 <- keyboad_url1 %>%
+  html_nodes("") %>%
+  html_text
 keyboadName1
 
-```
 #Scrape the Price
-```{r}
-keyboadPrice1 <- keyboadPrice1_url1 %>%
+keyboadPrice1 <- keyboad_url1 %>%
   html_nodes("") %>%
   html_text()
-
 keyboadPrice1
 
-```
 #Scrape the Ratings
-```{r}
-  
-```
+keyboadRatings1 <- keyboad_url1 %>%
+  html_nodes("") %>%
+  html_text()
+keyboadRatings1
+
 #Scrape the Total No. of Reviews
-```{r}
-   
+keyboadTotalRev1 <- keyboad_url1 %>%
+  html_nodes("") %>%
+  html_text()
+keyboadTotalRev1
+
+#Merge it in Data Frame
+data_frame1 <- data.frame(
+  Product_Name = keyboadName1,
+  Price = keyboadPrice1,
+  Ratings = keyboadRatings1,
+  Reviews = keyboadTotalRev1
+)
+data_Frame1
+```
+
 
