@@ -16,47 +16,196 @@ knitr::opts_chunk$set(echo = TRUE)
   library(httr)
   library(dplyr)
 
-url1 <- "https://www.amazon.com/s?k=gaming+keyboard&_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&pd_rd_r=e3298ce5-274c-4a84-bef0-2e6b17f5614d&pd_rd_w=ORmrN&pd_rd_wg=5GB7v&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=76D1QRTBMD0VDYY442YN&ref=pd_gw_unk"
+url1 <- "https://www.amazon.com/Portable-Mechanical-Keyboard-MageGee-Backlit/dp/B098LG3N6R/ref=sr_1_1?_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&dib=eyJ2IjoiMSJ9.xPISJOYMxoc_9dHbx858f_O35VE9n8_s6WvG1ovb3cKq_CSeRgiViZDzlpzYoM86AshAE48rZlKVqrhp5CYtgi63zqI2DyCKo__fF7Vik3PLLeCQlB8QU-fCKFSY07sQLAFPVLMiQZy1rIK-42IJheLHnntBCGG05tb7MbAiQ_VT__toOsEk9FcXRswjbJpryZw3FragLIqgJTdcl4UAkRx5gcMEensmGLkqfNQBH-g.Ewv4sqhL3VCmDHjkktWJnYiJ-gfyD2ndRwLOHc0YMaM&dib_tag=se&keywords=gaming+keyboard&pd_rd_r=3891b178-b803-44e5-af31-5ce03e34ab3a&pd_rd_w=Pq9TS&pd_rd_wg=2JYj1&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=F4AJRN21H9B3MK2W6ZY1&qid=1707956797&sr=8-1"
   session <- bow (url1, user_agent="Educational Purposes")
   session
- 
+
   session_page <- scrape(session)
 ```
 ```{r}
-keyboad_url1 <- read_html(url1)
+keyboard_url1 <- read_html(url1)
 
 #Scrape for the Name of the Product
-keyboadName1 <- keyboad_url1 %>%
-  html_nodes("") %>%
+keyboardName1 <- keyboard_url1 %>%
+  html_nodes("h1#title.a-size-large.a-spacing-none") %>%
   html_text
-keyboadName1
-
-#Scrape the Price
-keyboadPrice1 <- keyboad_url1 %>%
-  html_nodes("") %>%
+keyboardName1
+```
+Scrape the Price
+```{r}
+keyboardPrice1 <- keyboard_url1 %>%
+  html_nodes("span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay") %>%
   html_text()
-keyboadPrice1
-
-#Scrape the Ratings
-keyboadRatings1 <- keyboad_url1 %>%
-  html_nodes("") %>%
+keyboardPrice1
+```
+Scrape the Ratings
+```{r}
+keyboardRatings1 <- keyboard_url1 %>%
+  html_nodes("i.a-icon.a-icon-star.a-star-4-5.cm-cr-review-stars-spacing-big") %>%
   html_text()
-keyboadRatings1
-
-#Scrape the Total No. of Reviews
-keyboadTotalRev1 <- keyboad_url1 %>%
-  html_nodes("") %>%
+keyboardRatings1
+```
+Scrape the Total No. of Reviews
+```{r}
+keyboardTotalRev1 <- keyboard_url1 %>%
+  html_nodes("span#acrCustomerReviewText.a-size-base") %>%
   html_text()
-keyboadTotalRev1
-
-#Merge it in Data Frame
+keyboardTotalRev1
+```
+Merge it in Data Frame
+```{r}
 data_frame1 <- data.frame(
-  Product_Name = keyboadName1,
+  Product_Name = keyboardName1,
   Price = keyboadPrice1,
-  Ratings = keyboadRatings1,
-  Reviews = keyboadTotalRev1
+  Ratings = keyboardRatings1,
+  Reviews = keyboardTotalRev1
 )
-data_Frame1
+data_frame1
+```
+```{r}
+
+  library(rvest)
+  library(polite)
+  library(httr)
+  library(dplyr)
+
+url2 <- "https://www.amazon.com/Redragon-S101-Keyboard-Ergonomic-Programmable/dp/B00NLZUM36/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&dib=eyJ2IjoiMSJ9.xPISJOYMxoc_9dHbx858f_O35VE9n8_s6WvG1ovb3cKq_CSeRgiViZDzlpzYoM86AshAE48rZlKVqrhp5CYtgi63zqI2DyCKo__fF7Vik3PLLeCQlB8QU-fCKFSY07sQLAFPVLMiQZy1rIK-42IJheLHnntBCGG05tb7MbAiQ_VT__toOsEk9FcXRswjbJpryZw3FragLIqgJTdcl4UAkRx5gcMEensmGLkqfNQBH-g.Ewv4sqhL3VCmDHjkktWJnYiJ-gfyD2ndRwLOHc0YMaM&dib_tag=se&keywords=gaming+keyboard&pd_rd_r=3891b178-b803-44e5-af31-5ce03e34ab3a&pd_rd_w=Pq9TS&pd_rd_wg=2JYj1&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=F4AJRN21H9B3MK2W6ZY1&qid=1707956797&sr=8-2"
+
+
+keyboard_url2 <- read_html(url2)
+```
+Scrape for the Name of the Product
+```{r}
+keyboardName2 <- keyboard_url2 %>%
+  html_nodes("h1#title.a-size-large.a-spacing-none") %>%
+  html_text
+keyboardName2
+```
+Scrape the Price
+```{r}
+keyboardPrice2 <- keyboard_url2 %>%
+  html_nodes("span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay") %>%
+  html_text()
+keyboardPrice2
+```
+Scrape the Ratings
+```{r}
+keyboardRatings2 <- keyboard_url2 %>%
+  html_nodes("i.a-icon.a-icon-star.a-star-4-5.cm-cr-review-stars-spacing-big") %>%
+  html_text()
+keyboardRatings2
+```
+Scrape the Total No. of Reviews
+```{r}
+keyboardTotalRev2 <- keyboard_url2 %>%
+  html_nodes("span#acrCustomerReviewText.a-size-base") %>%
+  html_text()
+keyboardTotalRev2
 ```
 
+```{r}
 
+  library(rvest)
+  library(polite)
+  library(httr)
+  library(dplyr)
+
+url3 <- "https://www.amazon.com/Redragon-S101-Keyboard-Ergonomic-Programmable/dp/B00NLZUM36/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&dib=eyJ2IjoiMSJ9.xPISJOYMxoc_9dHbx858f_O35VE9n8_s6WvG1ovb3cKq_CSeRgiViZDzlpzYoM86AshAE48rZlKVqrhp5CYtgi63zqI2DyCKo__fF7Vik3PLLeCQlB8QU-fCKFSY07sQLAFPVLMiQZy1rIK-42IJheLHnntBCGG05tb7MbAiQ_VT__toOsEk9FcXRswjbJpryZw3FragLIqgJTdcl4UAkRx5gcMEensmGLkqfNQBH-g.Ewv4sqhL3VCmDHjkktWJnYiJ-gfyD2ndRwLOHc0YMaM&dib_tag=se&keywords=gaming+keyboard&pd_rd_r=3891b178-b803-44e5-af31-5ce03e34ab3a&pd_rd_w=Pq9TS&pd_rd_wg=2JYj1&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=F4AJRN21H9B3MK2W6ZY1&qid=1707956797&sr=8-2"
+keyboard_url3 <- read_html(url3)
+```
+
+Scrape for the Name of the Product
+```{r}
+keyboardName3 <- keyboard_url3 %>%
+  html_nodes("h1#title.a-size-large.a-spacing-none") %>%
+  html_text
+keyboardName3
+```
+Scrape the Price
+```{r}
+keyboardPrice3 <- keyboard_url3 %>%
+  html_nodes("span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay") %>%
+  html_text()
+keyboardPrice3
+```
+Scrape the Ratings
+```{r}
+keyboardRatings3 <- keyboard_url3 %>%
+  html_nodes("i.a-icon.a-icon-star.a-star-4-5.cm-cr-review-stars-spacing-big") %>%
+  html_text()
+keyboardRatings3
+```
+Scrape the Total No. of Reviews
+```{r}
+keyboardTotalRev3 <- keyboard_url3 %>%
+  html_nodes("span#acrCustomerReviewText.a-size-base") %>%
+  html_text()
+keyboardTotalRev3
+```
+
+```{r}
+url4 <- "https://www.amazon.com/Redragon-S101-Keyboard-Ergonomic-Programmable/dp/B00NLZUM36/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&dib=eyJ2IjoiMSJ9.xPISJOYMxoc_9dHbx858f_O35VE9n8_s6WvG1ovb3cKq_CSeRgiViZDzlpzYoM86AshAE48rZlKVqrhp5CYtgi63zqI2DyCKo__fF7Vik3PLLeCQlB8QU-fCKFSY07sQLAFPVLMiQZy1rIK-42IJheLHnntBCGG05tb7MbAiQ_VT__toOsEk9FcXRswjbJpryZw3FragLIqgJTdcl4UAkRx5gcMEensmGLkqfNQBH-g.Ewv4sqhL3VCmDHjkktWJnYiJ-gfyD2ndRwLOHc0YMaM&dib_tag=se&keywords=gaming+keyboard&pd_rd_r=3891b178-b803-44e5-af31-5ce03e34ab3a&pd_rd_w=Pq9TS&pd_rd_wg=2JYj1&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=F4AJRN21H9B3MK2W6ZY1&qid=1707956797&sr=8-2"
+keyboard_url4 <- read_html(url4)
+```
+
+Scrape for the Name of the Product
+```{r}
+keyboardName4 <- keyboard_url4 %>%
+  html_nodes("h1#title.a-size-large.a-spacing-none") %>%
+  html_text
+keyboardName4
+```
+Scrape the Price
+```{r}
+keyboardPrice4 <- keyboard_url4 %>%
+  html_nodes("span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay") %>%
+  html_text()
+keyboardPrice4
+```
+Scrape the Ratings
+```{r}
+keyboardRatings4 <- keyboard_url4 %>%
+  html_nodes("i.a-icon.a-icon-star.a-star-4-5.cm-cr-review-stars-spacing-big") %>%
+  html_text()
+keyboardRatings4
+```
+Scrape the Total No. of Reviews
+```{r}
+keyboardTotalRev4 <- keyboard_url4 %>%
+  html_nodes("span#acrCustomerReviewText.a-size-base") %>%
+  html_text()
+keyboardTotalRev4
+```
+
+```{r}
+url5 <- "https://www.amazon.com/Redragon-S101-Keyboard-Ergonomic-Programmable/dp/B00NLZUM36/ref=sr_1_2?_encoding=UTF8&content-id=amzn1.sym.12129333-2117-4490-9c17-6d31baf0582a&dib=eyJ2IjoiMSJ9.xPISJOYMxoc_9dHbx858f_O35VE9n8_s6WvG1ovb3cKq_CSeRgiViZDzlpzYoM86AshAE48rZlKVqrhp5CYtgi63zqI2DyCKo__fF7Vik3PLLeCQlB8QU-fCKFSY07sQLAFPVLMiQZy1rIK-42IJheLHnntBCGG05tb7MbAiQ_VT__toOsEk9FcXRswjbJpryZw3FragLIqgJTdcl4UAkRx5gcMEensmGLkqfNQBH-g.Ewv4sqhL3VCmDHjkktWJnYiJ-gfyD2ndRwLOHc0YMaM&dib_tag=se&keywords=gaming+keyboard&pd_rd_r=3891b178-b803-44e5-af31-5ce03e34ab3a&pd_rd_w=Pq9TS&pd_rd_wg=2JYj1&pf_rd_p=12129333-2117-4490-9c17-6d31baf0582a&pf_rd_r=F4AJRN21H9B3MK2W6ZY1&qid=1707956797&sr=8-2"
+keyboard_url5 <- read_html(url5)
+```
+Scrape for the Name of the Product
+```{r}
+keyboardName5 <- keyboard_url5 %>%
+  html_nodes("h1#title.a-size-large.a-spacing-none") %>%
+  html_text
+keyboardName5
+```
+Scrape the Price
+```{r}
+keyboardPrice5 <- keyboard_url5 %>%
+  html_nodes("span.a-price.aok-align-center.reinventPricePriceToPayMargin.priceToPay") %>%
+  html_text()
+keyboardPrice5
+```
+Scrape the Ratings
+```{r}
+keyboardRatings5 <- keyboard_url5 %>%
+  html_nodes("i.a-icon.a-icon-star.a-star-4-5.cm-cr-review-stars-spacing-big") %>%
+  html_text()
+keyboardRatings5
+```
+Scrape the Total No. of Reviews
+```{r}
+keyboardTotalRev5 <- keyboard_url5 %>%
+  html_nodes("span#acrCustomerReviewText.a-size-base") %>%
+  html_text()
+keyboardTotalRev5
+```
