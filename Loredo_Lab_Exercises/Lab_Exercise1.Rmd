@@ -71,3 +71,57 @@ frame1 <- data.frame(
 )
 frame1
 ```
+
+```{r}
+
+url2 <- "https://www.amazon.co.uk/b/?node=3063559031&ref_=Oct_d_odnav_d_3063457031_3&pd_rd_w=47deF&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=TPCKANG1V7R4GXMKY7MF&pd_rd_wg=tOTt0&pd_rd_r=82997abb-9b0f-41b1-8fe6-1e78efa48172"
+
+session2 <- bow(url2, user_agent = "Educational Purposes only")
+session2
+```
+```{r}
+library(rvest)
+library(stringr)
+library(httr2)
+
+session2 <- session("https://www.amazon.co.uk/b/?node=3063559031&ref_=Oct_d_odnav_d_3063457031_3&pd_rd_w=47deF&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=TPCKANG1V7R4GXMKY7MF&pd_rd_wg=tOTt0&pd_rd_r=82997abb-9b0f-41b1-8fe6-1e78efa48172")
+```
+
+```{r}
+namee2 <- session2 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+onee2<- namee2[1:48]
+onee2
+
+pricee2 <- session2 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+first_pricee2 <- str_extract(pricee2[1:48], "\\$[0-9.]+")
+#print first price
+print(first_pricee2)
+
+rating2 <- session2 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three2<- rating2[1:48]
+three2
+
+revieww2 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+fourr2<- revieww2[1:48]
+fourr2
+
+frame2 <- data.frame(
+  Name = onee2,
+  Price = first_pricee2,
+  Rating = three2,
+  Reviews = fourr2
+)
+frame2
+```
