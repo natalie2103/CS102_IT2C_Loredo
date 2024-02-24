@@ -1,0 +1,73 @@
+---
+title: "Lab_Exercise_1"
+author: "Natalie Joy Loredo"
+date: "2024-02-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Web Scraping
+```{r}
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+library(httr)
+
+url <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=vNMPH&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=NJZ9X2KC10F4KJGTQ5ZK&pd_rd_wg=QEDnf&pd_rd_r=f0ec34c4-73be-442f-8641-c9522a8ddf2b"
+
+session1 <- bow(url, user_agent = "Educational purposes only")
+session1
+```
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr2)
+library(dplyr)
+
+session1 <- session("https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=vNMPH&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=NJZ9X2KC10F4KJGTQ5ZK&pd_rd_wg=QEDnf&pd_rd_r=f0ec34c4-73be-442f-8641-c9522a8ddf2b")
+```
+
+```{r}
+name1 <- session1 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one1<- name1[1:50]
+one1
+
+price1 <- session1 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+first_price1 <- str_extract(price1[1:50], "\\$[0-9.]+")
+#print first price
+print(first_price1)
+
+rating <- session1 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3<- rating[1:50]
+three3
+
+review <- session1 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four4<- review[1:50]
+four4
+```
+
+```{r}
+frame1 <- data.frame(
+  Name = one1,
+  Price = first_price1,
+  Rating = three3,
+  Reviews = four4
+)
+frame1
+```
