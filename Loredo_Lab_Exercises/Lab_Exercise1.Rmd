@@ -193,8 +193,60 @@ First product
 ```{r}
 #product1
 
-url <- "https://www.amazon.co.uk/b/?node=3063623031&ref_=Oct_d_odnav_d_3063457031_6&pd_rd_w=E2eZb&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=41WP06KXB56MYCFP61VH&pd_rd_wg=a6MAR&pd_rd_r=c84d8cf5-c93d-4482-ae05-0928e42c63b8"
+urll <- "https://www.amazon.co.uk/b/?node=3063623031&ref_=Oct_d_odnav_d_3063457031_6&pd_rd_w=E2eZb&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=41WP06KXB56MYCFP61VH&pd_rd_wg=a6MAR&pd_rd_r=c84d8cf5-c93d-4482-ae05-0928e42c63b8"
 
 sessionn <- bow(urll, user_agent = "educational purposes")
 sessionn
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn <- session("https://www.amazon.co.uk/Drawing-Beginners-Tutorials-Transform-Skilled/dp/B0CM11R7K2/ref=sr_1_1_sspa?c=ts&dib=eyJ2IjoiMSJ9.Bg__zJLI29D7ssL_YSbBo682hLf-3V7ueRUxtG9X_8IwIXf0LJwLgEHRX74WsMLFz7i0DyNozrzMBymPM4HCc2sl2UIG2PsOCMtODqoK3Kef6fbeSbOuQY0n8ujyYyuj1WA2zVipVCS06jlNRxBYw_ISVB4BvzLf6r5w0QLwl5L802ZAMqoLIJZWU4c7-SL4Nu4EduroPLbCpRRr0epZ9-gOieTHLvG2VwiFlgvcKMdX4hxB13rSskxLB7ZX042oZ--pH548n33dPD-LpczF1YKugTm_nLqNDStq1G82A30.dSbm87H9Tg0o7MDaxHeRtPklcGCUSBqEzpY885ssw2o&dib_tag=se&keywords=Drawing&qid=1708842016&s=kitchen&sr=1-1-spons&ts_id=3063623031&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1")
+
+#Name of the reviewer
+name_rev <- sessionn %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namee<- name_rev[1:25]
+namee
+
+#Date of review
+date <- sessionn %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date
+date_rev <- date[1:25]
+date_rev
+
+#Individual rating
+rate <- sessionn %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiv_rate<- rate[1:25]
+indiv_rate
+
+#Review comment
+review_com <- sessionn %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review<- review_com[1:25]
+review <- gsub("\n", "", review)
+review 
+
+framee1 <- data.frame(
+  Name = namee,
+  Date = date_rev,
+  IndividualRating = indiv_rate,
+  Review = review 
+)
+framee1
+
+write.csv(framee1, file = "PRODUCT1.csv")
+```
 
