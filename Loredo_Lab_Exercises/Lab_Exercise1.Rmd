@@ -125,3 +125,76 @@ frame2 <- data.frame(
 )
 frame2
 ```
+
+```{r}
+url3 <- "https://www.amazon.co.uk/b/?node=3063458031&ref_=Oct_d_odnav_d_3063457031_1&pd_rd_w=8vXvA&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=J1WXVP74H9SE3C4RRWP4&pd_rd_wg=FWUnF&pd_rd_r=c209e7d1-f479-457e-8916-e468b46399f6"
+
+session3 <- bow(url3, user_agent = "Educational Purposes Only")
+session3
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+session3 <- session("https://www.amazon.co.uk/b/?node=3063458031&ref_=Oct_d_odnav_d_3063457031_1&pd_rd_w=8vXvA&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=J1WXVP74H9SE3C4RRWP4&pd_rd_wg=FWUnF&pd_rd_r=c209e7d1-f479-457e-8916-e468b46399f6")
+```
+
+```{r}
+name3 <- session3 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+onee3<- name3[1:2]
+onee3
+
+pricee3 <- session3 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+first_pricee3 <- str_extract(pricee3[1:2], "\\$[0-9.]+")
+##print first price
+print(first_pricee3)
+
+ratingg3 <- session3 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3<- ratingg3[1:2]
+three3
+
+review3 <- session3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four3<- review3[1:2]
+four3
+
+frame3 <- data.frame(
+  Name = onee3,
+  Price = first_pricee3,
+  Rating = three3,
+  Reviews = four3
+)
+frame3
+```
+
+```{r}
+productss12<- bind_rows(frame1, frame2, frame3)
+productss12
+```
+
+```{r}
+write.csv(productss12,file = "Products_Review100.csv")
+```
+
+10 products with 25 reviews each
+First product
+```{r}
+#product1
+
+url <- "https://www.amazon.co.uk/b/?node=3063623031&ref_=Oct_d_odnav_d_3063457031_6&pd_rd_w=E2eZb&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=41WP06KXB56MYCFP61VH&pd_rd_wg=a6MAR&pd_rd_r=c84d8cf5-c93d-4482-ae05-0928e42c63b8"
+
+sessionn <- bow(urll, user_agent = "educational purposes")
+sessionn
+
