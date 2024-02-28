@@ -1,0 +1,100 @@
+---
+title: "Exercise2"
+author: "Natalie Joy Loredo"
+date: "2024-02-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#Scrape 50 Products
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr) 
+library(httr)
+
+url <- "https://www.amazon.co.uk/s?bbn=560798&rh=n%3A4085761&fs=true&ref=lp_4085761_sar"
+session <- bow(url, user_agent = "For Educational Purposes ")
+session
+```
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr) 
+library(dplyr)
+
+session1 <- session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A4085761&fs=true&ref=lp_4085761_sar")
+```
+Names
+```{r}
+Name <- session1 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+Names<- Name[1:50]
+Names
+```
+50 Names of Reviewers
+```{r}
+#25 Names of Reviewers
+url  <-"https://www.amazon.co.uk/s?bbn=560798&rh=n%3A4085761&fs=true&ref=lp_4085761_sar "
+  session  <-bow(url, user_agent = "For Educational Purposes")
+  session
+
+  session_1 <-session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A4085761&fs=true&ref=lp_4085761_sar ")
+```
+
+```{r}
+#25 Product Names
+Name1  <- session_1 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+Names1 <- Name1[1:25]
+Names1
+```
+
+```{r}
+#25 products with Individual Rating and Date
+Rate_date <- session_1 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+Ratedates<- Rate_date[1:25]
+Ratedates
+```
+
+```{r}
+#25 Types of Purchases
+Type_purchase <- session_1 %>%
+  html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+  html_text()
+
+Types<- Type_purchase[1:25]
+Types
+```
+
+```{r}
+#25 Reviews
+Reviews <- session_1 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+Rev<- Reviews[1:25]
+Rev
+```
+
+```{r}
+frame1  <- data.frame(
+  Name = Names1,
+  Rating_and_Date = Ratedates, 
+  Type_of_Purchase = Types,
+  Reviews = Rev
+)
+frame1
+```
