@@ -1,0 +1,757 @@
+---
+title: "Lab_Exercise_1"
+author: "Natalie Joy Loredo"
+date: "2024-02-24"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Web Scraping
+```{r}
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+library(httr)
+
+url <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=vNMPH&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=NJZ9X2KC10F4KJGTQ5ZK&pd_rd_wg=QEDnf&pd_rd_r=f0ec34c4-73be-442f-8641-c9522a8ddf2b"
+
+session1 <- bow(url, user_agent = "Educational purposes only")
+session1
+```
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr2)
+library(dplyr)
+
+session1 <- session("https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=vNMPH&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=NJZ9X2KC10F4KJGTQ5ZK&pd_rd_wg=QEDnf&pd_rd_r=f0ec34c4-73be-442f-8641-c9522a8ddf2b")
+```
+
+```{r}
+name1 <- session1 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+one1<- name1[1:50]
+one1
+
+price1 <- session1 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+first_price1 <- str_extract(price1[1:50], "\\$[0-9.]+")
+#print first price
+print(first_price1)
+
+rating <- session1 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3<- rating[1:50]
+three3
+
+review <- session1 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four4<- review[1:50]
+four4
+```
+
+```{r}
+frame1 <- data.frame(
+  Name = one1,
+  Price = first_price1,
+  Rating = three3,
+  Reviews = four4
+)
+frame1
+```
+
+```{r}
+
+url2 <- "https://www.amazon.co.uk/b/?node=3063559031&ref_=Oct_d_odnav_d_3063457031_3&pd_rd_w=47deF&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=TPCKANG1V7R4GXMKY7MF&pd_rd_wg=tOTt0&pd_rd_r=82997abb-9b0f-41b1-8fe6-1e78efa48172"
+
+session2 <- bow(url2, user_agent = "Educational Purposes only")
+session2
+```
+```{r}
+library(rvest)
+library(stringr)
+library(httr2)
+
+session2 <- session("https://www.amazon.co.uk/b/?node=3063559031&ref_=Oct_d_odnav_d_3063457031_3&pd_rd_w=47deF&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=TPCKANG1V7R4GXMKY7MF&pd_rd_wg=tOTt0&pd_rd_r=82997abb-9b0f-41b1-8fe6-1e78efa48172")
+```
+
+```{r}
+namee2 <- session2 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+onee2 <- namee2[1:48]
+
+pricee2 <- session2 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+#Extract prices
+first_pricee2 <- str_extract(pricee2[1:48], "\\$[0-9.]+")
+
+#Print first prices
+print(first_pricee2)
+
+rating2 <- session2 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three2 <- rating2[1:48]
+
+revieww2 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+fourr2 <- revieww2[1:48]
+
+#Create data frame
+frame2 <- data.frame(
+  Name = onee2,
+  Price = first_pricee2,
+  Rating = three2,
+  Reviews = fourr2
+)
+frame2
+```
+
+```{r}
+url3 <- "https://www.amazon.co.uk/b/?node=3063458031&ref_=Oct_d_odnav_d_3063457031_1&pd_rd_w=8vXvA&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=J1WXVP74H9SE3C4RRWP4&pd_rd_wg=FWUnF&pd_rd_r=c209e7d1-f479-457e-8916-e468b46399f6"
+
+session3 <- bow(url3, user_agent = "Educational Purposes Only")
+session3
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+session3 <- session("https://www.amazon.co.uk/b/?node=3063458031&ref_=Oct_d_odnav_d_3063457031_1&pd_rd_w=8vXvA&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=J1WXVP74H9SE3C4RRWP4&pd_rd_wg=FWUnF&pd_rd_r=c209e7d1-f479-457e-8916-e468b46399f6")
+```
+
+```{r}
+name3 <- session3 %>%
+  html_nodes("h2") %>%
+  html_text()
+
+onee3<- name3[1:2]
+onee3
+
+pricee3 <- session3 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+first_pricee3 <- str_extract(pricee3[1:2], "\\$[0-9.]+")
+##print first price
+print(first_pricee3)
+
+ratingg3 <- session3 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+three3<- ratingg3[1:2]
+three3
+
+review3 <- session3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+four3<- review3[1:2]
+four3
+
+frame3 <- data.frame(
+  Name = onee3,
+  Price = first_pricee3,
+  Rating = three3,
+  Reviews = four3
+)
+frame3
+```
+
+```{r}
+productss12<- bind_rows(frame1, frame2, frame3)
+productss12
+```
+
+```{r}
+write.csv(productss12,file = "Products_Review100.csv")
+```
+
+10 products with 25 reviews each
+First product
+```{r}
+#product1
+
+urll <- "https://www.amazon.co.uk/b/?node=3063623031&ref_=Oct_d_odnav_d_3063457031_6&pd_rd_w=E2eZb&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=41WP06KXB56MYCFP61VH&pd_rd_wg=a6MAR&pd_rd_r=c84d8cf5-c93d-4482-ae05-0928e42c63b8"
+
+sessionn <- bow(urll, user_agent = "educational purposes")
+sessionn
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn <- session("https://www.amazon.co.uk/Drawing-Beginners-Tutorials-Transform-Skilled/dp/B0CM11R7K2/ref=sr_1_1_sspa?c=ts&dib=eyJ2IjoiMSJ9.Bg__zJLI29D7ssL_YSbBo682hLf-3V7ueRUxtG9X_8IwIXf0LJwLgEHRX74WsMLFz7i0DyNozrzMBymPM4HCc2sl2UIG2PsOCMtODqoK3Kef6fbeSbOuQY0n8ujyYyuj1WA2zVipVCS06jlNRxBYw_ISVB4BvzLf6r5w0QLwl5L802ZAMqoLIJZWU4c7-SL4Nu4EduroPLbCpRRr0epZ9-gOieTHLvG2VwiFlgvcKMdX4hxB13rSskxLB7ZX042oZ--pH548n33dPD-LpczF1YKugTm_nLqNDStq1G82A30.dSbm87H9Tg0o7MDaxHeRtPklcGCUSBqEzpY885ssw2o&dib_tag=se&keywords=Drawing&qid=1708842016&s=kitchen&sr=1-1-spons&ts_id=3063623031&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1")
+
+#Name of the reviewer
+name_rev <- sessionn %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+namee<- name_rev[1:25]
+namee
+
+#Date of review
+date <- sessionn %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date
+date_rev <- date[1:25]
+date_rev
+
+#Individual rating
+rate <- sessionn %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+indiv_rate<- rate[1:25]
+indiv_rate
+
+#Review comment
+review_com <- sessionn %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review<- review_com[1:25]
+review <- gsub("\n", "", review)
+review 
+
+framee1 <- data.frame(
+  Name = namee,
+  Date = date_rev,
+  IndividualRating = indiv_rate,
+  Review = review 
+)
+framee1
+
+write.csv(framee1, file = "PRODUCT1.csv")
+```
+Second product
+```{r}
+#product1
+
+urll2 <- "https://www.amazon.co.uk/b/?node=3063845031&ref_=Oct_d_odnav_d_3063457031_2&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn2 <- bow(urll2, user_agent = "Educational purposes")
+sessionn2
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionnl <- session("https://www.amazon.co.uk/Hobby-Gift-Wooden-Cantilever-Storage/dp/B0BXF7T5KF/ref=sr_1_1_sspa?c=ts&dib=eyJ2IjoiMSJ9.NI_qRPnfvqzXu6XX8gPtGBkjcR63iCFDnmEHiM1m_O7oCfYdikgH98eh9p7IPOAx2PstI0D0ygCxp-CLEX-BxjAAKq6tGbqJbaKxHQTG_TvELc4EiauCrZN92vboHHqKdwE82B0pcz57ySETTxex2LerK1-5ibiDGaSmCkTmQyC11XMfeDwglH70p_1OKgT9MHgn2Q-5KCRpcwbrTZ_M4KKGWzoqj9uiAjW0kZK8pG8-031kEJq-SZayr_Rr62rRWu40jWCNahH74I87DgLh3PJlJMJ9U3-GDNfVjfkhVt8.F7JEDOGzg3Ec_i_uSw8o7auFO4m2-zgg5xQPfHHnp4o&dib_tag=se&keywords=Sewing%2BAccessories&qid=1708953003&s=kitchen&sr=1-1-spons&ts_id=3063845031&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&th=1")
+
+#Name of the reviewer
+name_rev2 <- sessionnl %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+nameee <- name_rev2[1:25]
+
+#Date of review
+date2 <- sessionnl %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev2 <- date2[1:25]
+
+#Individual rating
+rate2 <- sessionnl %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv2 <- rate2[1:25]
+
+#Review comment
+review_com <- sessionnl %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review <- review_com[1:25]
+review <- gsub("\n", "", review)
+
+framee2 <- data.frame(
+  Name = nameee,
+  Date = date_rev2,
+  IndividualRating = rate_indiv2,
+  Review = review  
+)
+framee2
+
+write.csv(framee2, file = "PRODUCT2.csv")
+```
+
+```{r}
+write.csv(products, file = "ProductReviews.csv")
+```
+Third product
+```{r}
+#product1
+
+urll3 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn3 <- bow(urll3, user_agent = "Educational Purposes Only")
+sessionn3
+
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn3 <- session("https://www.amazon.co.uk/Red-Heart-Accessories-Crocheting-Amigurumi/dp/B0C4482KNM/ref=sr_1_1_sspa?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-1-spons&ts_id=3063669031&sp_csd=d2lkZ2V0TmFtZT1zcF9hdGY&psc=1")
+
+#Name of the reviewer
+name_review3 <- sessionn3 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name3 <- name_review3[1:25]
+
+#Date of review
+date3 <- sessionn3 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev3 <- date3[1:25]
+
+#Individual rating
+rate3 <- sessionn3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv3 <- rate3[1:25]
+
+#Review comment
+review_com3 <- sessionn3 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review3 <- review_com3[1:25]
+review3 <- gsub("\n", "", review3)
+
+framee3 <- data.frame(
+  Name = name3,
+  Date = date_rev3,
+  Individual_Rating = rate_indiv3,
+  Review = review3
+)
+framee3
+
+write.csv(framee3, file = "PRODUCT3.csv")
+```
+Fourth product
+```{r}
+#product1
+
+urll4 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn4 <- bow(urll4, user_agent = "Educational Purposes only")
+sessionn4
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn4 <- session("https://www.amazon.co.uk/KOKNIT-Inclusive-Knitting-Professional-Accessories/dp/B09CYRZCNM/ref=sr_1_2?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-2&ts_id=3063669031")
+
+#Name of the reviewer
+name_review4 <- sessionn4 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name4 <- name_review4[1:25]
+
+#Date of review
+date4 <- sessionn4 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev4 <- date4[1:25]
+
+#Individual rating
+rate4 <- sessionn4 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv4 <- rate4[1:25]
+
+#Review comment
+review_com4 <- sessionn4 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review4 <- review_com4[1:25]
+review4 <- gsub("\n", "", review4)
+
+framee4 <- data.frame(
+  Name = name4,
+  Date = date_rev4,
+  Individual_Rating = rate_indiv4,
+  Review = review4
+)
+framee4
+
+write.csv(framee4, file = "PRODUCT4.csv")
+```
+Fifth product
+```{r}
+#product1
+
+urll5 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn5 <- bow(urll5, user_agent = "Educational Purposes")
+sessionn5
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn5 <- session("https://www.amazon.co.uk/UHAPEER-Beginner-Beginners-Instruction-Tutorials/dp/B0C7QFX634/ref=sr_1_3?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-3&ts_id=3063669031")
+
+#Name of the reviewer
+name_review5 <- sessionn5 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name5 <- name_review5[1:25]
+
+#Date of review
+date5 <- sessionn5 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev5 <- date5[1:25]
+
+#Individual rating
+rate5 <- sessionn5 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv5 <- rate5[1:25]
+
+#Review comment
+review_com5 <- sessionn5 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review5 <- review_com5[1:25]
+review5 <- gsub("\n", "", review5)
+
+framee5 <- data.frame(
+  Name = name5,
+  Date = date_rev5,
+  Individual_Rating = rate_indiv5,
+  Review = review5
+)
+framee5
+
+write.csv(framee5, file = "PRODUCT5.csv")
+```
+Sixth product
+```{r}
+#product1
+
+urll6 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn6 <- bow(urll6, user_agent = "Educational Purposes only")
+sessionn6
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn6 <- session("https://www.amazon.co.uk/Coopay-Beginners-Crocheting-Beginner-Instructions/dp/B0BZRCYXSM/ref=sr_1_4?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-4&ts_id=3063669031")
+
+#Name of the reviewer
+name_review6 <- sessionn6 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name6 <- name_review6[1:25]
+
+#Date of review
+date6 <- sessionn6 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev6 <- date6[1:25]
+
+#Individual rating
+rate6 <- sessionn6 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv6 <- rate6[1:25]
+
+#Review comment
+review_com6 <- sessionn6 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review6 <- review_com6[1:25]
+review6 <- gsub("\n", "", review6)
+
+framee6 <- data.frame(
+  Name = name6,
+  Date = date_rev6,
+  Individual_Rating = rate_indiv6,
+  Review = review6
+)
+framee6
+
+write.csv(framee6, file = "PRODUCT6.csv")
+```
+Seventh product
+```{r}
+#product1
+
+urll7 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn7 <- bow(urll7, user_agent = "Educational Purposes Only")
+sessionn7
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn7 <- session("https://www.amazon.co.uk/Luckits-Beginner-Knitting-Handcraft-Instruction/dp/B0CBR98PBZ/ref=sr_1_5?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-5&ts_id=3063669031")
+
+#Name of the reviewer
+name_review7 <- sessionn7 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name7 <- name_review7[1:25]
+
+#Date of review
+date7 <- sessionn7 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev7 <- date7[1:25]
+
+#Individual rating
+rate7 <- sessionn7 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv7 <- rate7[1:25]
+
+#Review comment
+review_com7 <- sessionn7 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review7 <- review_com7[1:25]
+review7 <- gsub("\n", "", review7)
+
+framee7 <- data.frame(
+  Name = name7,
+  Date = date_rev7,
+  Individual_Rating = rate_indiv7,
+  Review = review7
+)
+framee7
+
+write.csv(framee7, file = "PRODUCT7.csv")
+```
+Eighth product
+```{r}
+#product1
+
+urll8 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn8 <- bow(urll8, user_agent = "EDucational Purposes Only")
+sessionn8
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn8 <- session("https://www.amazon.co.uk/Auniq-Knitting-Ergonomic-Accessories-Beginners/dp/B09G2S6RH7/ref=sr_1_6?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-6&ts_id=3063669031")
+
+#Name of the reviewer
+name_review8 <- sessionn8 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name8 <- name_review8[1:25]
+
+#Date of review
+date8 <- sessionn8 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev8 <- date8[1:25]
+
+#Individual rating
+rate8 <- sessionn8 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv8 <- rate8[1:25]
+
+#Review comment
+review_com8 <- sessionn8 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review8 <- review_com8[1:25]
+review8 <- gsub("\n", "", review8)
+
+framee8 <- data.frame(
+  Name = name8,
+  Date = date_rev8,
+  Individual_Rating = rate_indiv8,
+  Review = review8
+)
+framee8
+
+write.csv(framee8, file = "PRODUCT8.csv")
+```
+Nineth product
+```{r}
+#product1
+
+urll9 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn9 <- bow(urll9, user_agent = "EDUcational Purposes Only")
+sessionn9
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn9 <- session("https://www.amazon.co.uk/LAMXD-Knit-Blockers-Blocking-Combs/dp/B08X2G2KLP/ref=sr_1_8?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-8&ts_id=3063669031")
+
+#Name of the reviewer
+name_review9 <- sessionn9 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name9 <- name_review9[1:25]
+
+#Date of review
+date9 <- sessionn9 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev9 <- date9[1:25]
+
+#Individual rating
+rate9 <- sessionn9 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv9 <- rate9[1:25]
+
+#Review comment
+review_com9 <- sessionn9 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review9 <- review_com9[1:25]
+review9 <- gsub("\n", "", review9)
+
+framee9 <- data.frame(
+  Name = name9,
+  Date = date_rev9,
+  Individual_Rating = rate_indiv9,
+  Review = review9
+)
+framee9
+
+write.csv(framee9, file = "PRODUCT9.csv")
+```
+Tenth product
+```{r}
+#product1
+
+urll10 <- "https://www.amazon.co.uk/b/?node=3063669031&ref_=Oct_d_odnav_d_3063457031_4&pd_rd_w=k1ciy&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=13PPE700ZVMDEQ5S3Z2T&pd_rd_wg=foWVQ&pd_rd_r=ea8a2d24-374f-4721-9223-7309c26327c7"
+
+sessionn10 <- bow(urll10, user_agent = "EDUCational Purposes Only")
+sessionn10
+
+library(rvest)
+library(stringr)
+library(httr2)
+library(httr)
+
+sessionn10 <- session("https://www.amazon.co.uk/Boye-34021081231-Interlocking-Knitting-Crochet/dp/B07K7CSWRS/ref=sr_1_11?c=ts&dib=eyJ2IjoiMSJ9.KZRFBENAv3pXidLe-GpFaMyz0a0s5maLu4GYnQwEwm0seNNOMzI2LRYhlEDGKaG2iwpqh5koriQIYTJITnmk9JTRIqTm15ZVdPqVXiNHEVH9Ea7Uch5mscuTQO9IAxYDQxw_MyR4cUO5roC64PHSx5qi7VVIRKLw6acczYJopUsAE4umBkqUiL5NlgrrJ8Lzd3xcOr1fzoMxeRIJckd0bSV3OTp96p8nuT6QSy-tbCb0KD-fkvcJOsxHcKC_t5kLh3i3cfnZMtvuHs-_Q0hSzoqsaYVNbzeaQ6XrRzFmpwY.pKe4gl4Kh2Qbnxyo1eKeAksYVNAgxp2deuniyeWmO1Y&dib_tag=se&keywords=Knitting+%26+Crochet&qid=1708955246&s=kitchen&sr=1-11&ts_id=3063669031")
+
+#Name of the reviewer
+name_review10 <- sessionn10 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+
+name10 <- name_review10[1:25]
+
+#Date of review
+date10 <- sessionn10 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+date_rev10 <- date10[1:25]
+
+#Individual rating
+rate10 <- sessionn10 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+rate_indiv10 <- rate10[1:25]
+
+#Review comment
+review_com10 <- sessionn10 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+
+review10 <- review_com10[1:25]
+review10 <- gsub("\n", "", review10)
+
+framee10 <- data.frame(
+  Name = name10,
+  Date = date_rev10,
+  Individual_Rating = rate_indiv10,
+  Review = review10
+)
+framee10
+
+write.csv(framee10, file = "PRODUCT10.csv")
+```
+
+
+
+
+
