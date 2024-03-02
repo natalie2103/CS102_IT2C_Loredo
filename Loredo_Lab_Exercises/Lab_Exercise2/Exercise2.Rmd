@@ -99,7 +99,7 @@ frame1  <- data.frame(
 frame1
 ```
 ```{r}
-write.csv(frame1, file = "50ProductReviews")
+write.csv(frame1, file = "First_50ProductReviews.csv")
 ```
 
 ```{r}
@@ -167,5 +167,5 @@ data1 <- cbind(frame1, frame2)
 ```
 
 ```{r}
-write.csv(frame2, file = "Lab_Exercise2/50ProductReviews")
+write.csv(frame2, file = "Lab_Exercise2_50_ProductReviews.csv")
 ```
