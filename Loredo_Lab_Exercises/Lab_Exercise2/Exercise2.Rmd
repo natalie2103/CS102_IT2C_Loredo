@@ -98,3 +98,74 @@ frame1  <- data.frame(
 )
 frame1
 ```
+```{r}
+write.csv(frame1, file = "50ProductReviews")
+```
+
+```{r}
+#25 Name of reviewers
+
+  url1 <- "https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=0adc0ff2-4259-4fcc-8d68-6eb71d9bce33&pd_rd_w=W7QFn&pd_rd_wg=sbk9d&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=RPNSP1E1HKWW7695JR5A&rd=1&ref=Oct_d_odnav_d_4085731_0"
+
+  session <- bow(url1, user_agent = "For Educational Purposes")
+  session
+
+  session2 <- session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=0adc0ff2-4259-4fcc-8d68-6eb71d9bce33&pd_rd_w=W7QFn&pd_rd_wg=sbk9d&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=RPNSP1E1HKWW7695JR5A&rd=1&ref=Oct_d_odnav_d_4085731_0")
+```
+
+```{r}
+#25 Product names
+
+Name1 <- session2 %>%
+  html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
+  html_text()
+
+Names1<- Name1[1:25]
+Names1
+```
+
+```{r}
+#25 Individual Rating and Date
+Rate_date1 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+Rate_dates1<- Rate_date1[1:25]
+Rate_dates1
+```
+
+```{r}
+#25 Types of Purchase
+Type_Purchase1 <- session2 %>%
+  html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+  html_text()
+
+Types1<- Type_Purchase1[1:25]
+Types1
+```
+
+```{r}
+#25 Reviews
+Review1 <- session2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+Reviews1<- Review1[1:25]
+Reviews1
+```
+
+```{r}
+frame2 <- data.frame(
+  Name = Names1,
+  Rating_and_Date = Rate_dates1,
+  Type_of_Purchase = Types1,
+  Reviews = Reviews1
+)
+frame2
+```
+```{r}
+data1 <- cbind(frame1, frame2)
+```
+
+```{r}
+write.csv(frame2, file = "Lab_Exercise2/50ProductReviews")
+```
