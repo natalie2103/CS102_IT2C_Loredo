@@ -469,4 +469,8 @@ Movie5df <- data.frame(Movie_Title = get5thTitle,
                        )
 Movie5df
 ```
+```{r}
+#6th movie title
+get6thTitle <- submovie[6]
+get6thTitle
 
