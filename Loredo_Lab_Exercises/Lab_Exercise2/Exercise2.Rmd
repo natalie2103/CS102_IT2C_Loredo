@@ -98,9 +98,6 @@ frame1  <- data.frame(
 )
 frame1
 ```
-```{r}
-write.csv(frame1, file = "First_50ProductReviews.csv")
-```
 
 ```{r}
 #25 Name of reviewers
@@ -162,10 +159,14 @@ frame2 <- data.frame(
 )
 frame2
 ```
+
 ```{r}
-data1 <- cbind(frame1, frame2)
+Reviewsdf <- bind_rows( frame1, 
+                        frame2)
+
+Reviewsdf
 ```
 
 ```{r}
-write.csv(frame2, file = "Lab_Exercise2_50_ProductReviews.csv")
+write.csv(frame2, file = "LabExercise2_50_ProductReviews.csv")
 ```
