@@ -168,5 +168,7 @@ Reviewsdf
 ```
 
 ```{r}
-write.csv(frame2, file = "LabExercise2_50_ProductReviews.csv")
+write.csv(Reviewsdf, "50ProductReviews.csv")
+
+read.csv("50ProductReviews.csv")
 ```
