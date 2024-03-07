@@ -158,6 +158,7 @@ subsetReviewTitle
 
 Reviewsplit1 <- unlist(strsplit(subsetReviewTitle, "\n"))
 Reviewsplit1
+
 ```
 First movie Data Frame
 ```{r}
@@ -169,6 +170,13 @@ Movie1df <- data.frame(Movie_Title = get1stTitle,
                        Title_Review = Reviewsplit1
                        )
 Movie1df
+
+```
+
+```{r}
+write.csv(Movie1df, "FirstMovie.csv")
+
+read.csv("FirstMovie.csv")
 ```
 Second movie 
 ```{r}
@@ -245,6 +253,13 @@ Movie2df <- data.frame(Movie_Title = get2ndTitle,
                        )
 Movie2df
 ```
+
+
+```{r}
+write.csv(Movie2df, "SecondMovie.csv")
+
+read.csv("SecondMovie.csv")
+```
 Third movie 
 ```{r}
 #3rd movie title
@@ -320,6 +335,12 @@ Movie3df <- data.frame(Movie_Title = get3rdTitle,
                        )
 Movie3df
 ```
+
+```{r}
+write.csv(Movie3df, "ThirdMovie.csv")
+
+read.csv("ThirdMovie.csv")
+```
 Fourth movie
 ```{r}
 #4th movie title
@@ -394,6 +415,12 @@ Movie4df <- data.frame(Movie_Title = get4thTitle,
                        TitleReview = Reviewsplit4
                        )
 Movie4df
+```
+
+```{r}
+write.csv(Movie4df, "FourthMovie.csv")
+
+read.csv("FourthMovie.csv")
 ```
 Fifth movie
 ```{r}
@@ -471,6 +498,11 @@ Movie5df <- data.frame(Movie_Title = get5thTitle,
 Movie5df
 ```
 
+```{r}
+write.csv(Movie5df, "FifthMovie.csv")
+
+read.csv("FifthMovie.csv")
+```
 Sixth movie
 ```{r}
 #6th movie title
@@ -549,6 +581,12 @@ Movie6df <- data.frame(Movie_Title = get6thTitle,
                        )
 Movie6df
 ```
+
+```{r}
+write.csv(Movie6df, "SixthMovie.csv")
+
+read.csv("SixthMovie.csv")
+```
 Seventh movie
 ```{r}
 #7th movie title
@@ -623,6 +661,12 @@ Movie7df <- data.frame(Movie_Title = get7thTitle,
                        TitleReview = Reviewsplit7
                        )
 Movie7df
+```
+
+```{r}
+write.csv(Movie6df, "SeventhMovie.csv")
+
+read.csv("SeventhMovie.csv")
 ```
 
 Eight movie
@@ -704,6 +748,11 @@ Movie8df <- data.frame(Movie_Title = get8thTitle,
 Movie8df
 ```
 
+```{r}
+write.csv(Movie8df, "EigthMovie.csv")
+
+read.csv("EigthMovie.csv")
+```
 Nineth movie
 ```{r}
 #9th movie title
@@ -779,6 +828,12 @@ Movie9df <- data.frame(Movie_Title = get9thTitle,
                        )
 Movie9df
 ```
+
+```{r}
+write.csv(Movie9df, "NinethMovie.csv")
+
+read.csv("NinethMovie.csv")
+```
 Tenth movie
 ```{r}
 #10th movie title
@@ -846,6 +901,12 @@ Reviewsplit10
 Cleanreview10 <- iconv(Reviewsplit10, to = "ASCII", sub = "byte")
 Cleanreview10
 ``` 
+
+```{r}
+write.csv(Movie10df, "TenthMovie.csv")
+
+read.csv("TenthMovie.csv")
+```
 
 ```{r}
 Movie10df <- data.frame(Movie_Title = get10thTitle,
