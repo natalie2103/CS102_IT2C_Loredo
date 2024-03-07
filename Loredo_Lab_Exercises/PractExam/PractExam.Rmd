@@ -1,0 +1,110 @@
+---
+title: "PractExam"
+author: "Natalie Joy Loredo"
+date: "2024-03-07"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#A. Load the built-in warpbreaks dataset.
+
+data("warpbreaks")
+warpbreaks
+
+```
+
+```{r}
+#1. 
+str(warpbreaks)
+```
+
+```{r}
+#A2. How many observations does it have? 
+
+#Answer: 54 obsrvations
+
+```
+
+```{r}
+#A3.
+typeof(warpbreaks$breaks)
+typeof(warpbreaks$wool)
+typeof(warpbreaks$tension)
+
+```
+
+```{r}
+#B1. Read the complete file using readLines.
+
+file <- file("exampleFile.txt")
+
+readFile <- readLines(file)
+readFile
+
+```
+
+```{r}
+#B2. Use grepl
+
+Comments <- readFile[grepl("^//", readFile)]
+Comments 
+
+datavec <- readFile[!grepl("^//", readFile)]
+datavec
+```
+
+```{r}
+#B3. Extract the date from the first comment line and display on the screen “It was created data.”
+
+subCom <- Comments[1]
+date <- gsub ("// Survey data. Created : ", "", subCom)
+date 
+
+cat("It was created, ", date)
+
+```
+
+```{r}
+#4. Read the data into a matrix
+#B4a.
+vecsplit <- (strsplit(datavec, ";"))
+vecsplit
+
+```
+
+```{r}
+#4b.
+maxvec <- max(lengths(vecsplit))
+maxvec
+
+row_append <- lapply(vecsplit, function(x) c(x, rep(NA, maxvec - length(x))))
+row_append
+
+```
+
+```{r}
+#B4c
+
+unlist_data <- unlist(row_append)
+unlist_data
+
+data_matrix <- matrix(unlist_data, ncol = 4, nrow = 3, 
+                      dimnames = list(c("row1", "row2", "row3")))
+data_matrix
+
+```
+
+```{r}
+#B4d.
+
+field_names <- Comments[2:4]
+extra_field_name <- gsub("//", "", field_names)
+rownames(data_matrix) <- extra_field_name
+data_matrix
+
+```
+  
