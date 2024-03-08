@@ -98,6 +98,11 @@ frame1  <- data.frame(
 )
 frame1
 ```
+```{r}
+write.csv(frame1, "First25Product.csv")
+
+read.csv("First25Product.csv")
+```
 
 ```{r}
 #25 Name of reviewers
@@ -158,6 +163,11 @@ frame2 <- data.frame(
   Reviews = Reviews1
 )
 frame2
+```
+```{r}
+write.csv(frame2, "Second25Products.csv")
+
+read.csv("Second25Products.csv")
 ```
 
 ```{r}
