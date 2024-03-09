@@ -99,75 +99,98 @@ frame1  <- data.frame(
 frame1
 ```
 ```{r}
-write.csv(frame1, "First_25Products.csv")
+write.csv(frame1, "1st25Products.csv")
 
 read.csv("First_25Products.csv")
 ```
 
 ```{r}
-#25 Name of reviewers
 
-  url1 <- "https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=0adc0ff2-4259-4fcc-8d68-6eb71d9bce33&pd_rd_w=W7QFn&pd_rd_wg=sbk9d&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=RPNSP1E1HKWW7695JR5A&rd=1&ref=Oct_d_odnav_d_4085731_0"
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr) 
+library(httr)
 
-  session <- bow(url1, user_agent = "For Educational Purposes")
-  session
+url2<-"https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=74d05b18-baed-4b94-8b61-69ce58756493&pd_rd_w=Q753p&pd_rd_wg=97bhk&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=2SY985AAWA7BM17HCS5T&rd=1&ref=Oct_d_odnav_d_4085731_0"
 
-  session2 <- session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=0adc0ff2-4259-4fcc-8d68-6eb71d9bce33&pd_rd_w=W7QFn&pd_rd_wg=sbk9d&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=RPNSP1E1HKWW7695JR5A&rd=1&ref=Oct_d_odnav_d_4085731_0")
+session<-bow(url, user_agent = "For Educational Purposes")
+session
+```
+
+```{r}
+library(rvest)
+library(stringr)
+library(httr) 
+library(dplyr)
+
+session2 <- session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=74d05b18-baed-4b94-8b61-69ce58756493&pd_rd_w=Q753p&pd_rd_wg=97bhk&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=2SY985AAWA7BM17HCS5T&rd=1&ref=Oct_d_odnav_d_4085731_0")
+```
+50 Names of Reviewers
+```{r}
+#25 Names of Reviewers
+
+url2  <-"https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=74d05b18-baed-4b94-8b61-69ce58756493&pd_rd_w=Q753p&pd_rd_wg=97bhk&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=2SY985AAWA7BM17HCS5T&rd=1&ref=Oct_d_odnav_d_4085731_0"
+
+session  <-bow(url, user_agent = "For Educational Purposes")
+session
+
+session_2 <-session("https://www.amazon.co.uk/s?bbn=560798&rh=n%3A15488758031&language=en_GB&_encoding=UTF8&brr=1&content-id=amzn1.sym.c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pd_rd_r=74d05b18-baed-4b94-8b61-69ce58756493&pd_rd_w=Q753p&pd_rd_wg=97bhk&pf_rd_p=c6fcbfa3-a0cb-49d1-be17-9aeb9a6d61f8&pf_rd_r=2SY985AAWA7BM17HCS5T&rd=1&ref=Oct_d_odnav_d_4085731_0")
 ```
 
 ```{r}
 #25 Product names
-
-Name1 <- session2 %>%
+Name2 <- session_2 %>%
   html_nodes("span.a-size-base-plus.a-color-base.a-text-normal") %>%
   html_text()
 
-Names1<- Name1[1:25]
-Names1
+Names2<- Name2[1:25]
+Names2
 ```
 
 ```{r}
 #25 Individual Rating and Date
-Rate_date1 <- session2 %>%
+Rate_date2 <- session_2 %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
-Rate_dates1<- Rate_date1[1:25]
-Rate_dates1
+Rate_dates2<- Rate_date2[1:25]
+Rate_dates2
 ```
 
 ```{r}
 #25 Types of Purchase
-Type_Purchase1 <- session2 %>%
+Type_Purchase2 <- session_2 %>%
   html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
   html_text()
 
-Types1<- Type_Purchase1[1:25]
-Types1
+Types2<- Type_Purchase2[1:25]
+Types2
 ```
 
 ```{r}
 #25 Reviews
-Review1 <- session2 %>%
+Review2 <- session_2 %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
 
-Reviews1<- Review1[1:25]
-Reviews1
+Reviews2<- Review2[1:25]
+Reviews2
 ```
 
 ```{r}
 frame2 <- data.frame(
-  Name = Names1,
-  Rating_and_Date = Rate_dates1,
-  Type_of_Purchase = Types1,
-  Reviews = Reviews1
+  Name = Names2,
+  Rating_and_Date = Rate_dates2,
+  Type_of_Purchase = Types2,
+  Reviews = Reviews2
 )
 frame2
 ```
-```{r}
-write.csv(frame2, "Second_25Products.csv")
 
-read.csv("Second_25Products.csv")
+```{r}
+write.csv(frame2, "2nd25Products.csv")
+
+read.csv("2nd25Products.csv")
 ```
 
 ```{r}
