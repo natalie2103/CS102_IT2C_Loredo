@@ -99,9 +99,9 @@ frame1  <- data.frame(
 frame1
 ```
 ```{r}
-write.csv(frame1, "1st25Products.csv")
+write.csv(frame1, "1st_25Products.csv")
 
-read.csv("First_25Products.csv")
+read.csv("1st_25Products.csv")
 ```
 
 ```{r}
@@ -188,9 +188,9 @@ frame2
 ```
 
 ```{r}
-write.csv(frame2, "2nd25Products.csv")
+write.csv(frame2, "2nd_25Products.csv")
 
-read.csv("2nd25Products.csv")
+read.csv("2nd_25Products.csv")
 ```
 
 ```{r}
@@ -201,7 +201,7 @@ Reviewsdf
 ```
 
 ```{r}
-write.csv(Reviewsdf, "50ProductReviews.csv")
+write.csv(Reviewsdf, "50ProductsReviews.csv")
 
-read.csv("50ProductReviews.csv")
+read.csv("50ProductsReviews.csv")
 ```
