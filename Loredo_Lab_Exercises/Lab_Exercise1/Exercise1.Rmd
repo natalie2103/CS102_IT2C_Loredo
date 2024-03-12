@@ -1,0 +1,223 @@
+---
+title: "Exercise1"
+author: "Natalie Joy Loredo"
+date: "2024-03-12"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Web Scraping
+```{r}
+#URL and Libraries
+
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr)
+
+url1 <- "https://www.amazon.co.uk/s?bbn=560798&rh=n%3A4085881&fs=true&ref=lp_4085881_sar"
+url2 <- "https://www.amazon.co.uk/s?i=electronics&bbn=560798&rh=n%3A4085881&fs=true&page=2&qid=1710233936&ref=sr_pg_2"
+url3 <- "https://www.amazon.co.uk/s?i=electronics&bbn=560798&rh=n%3A4085881&fs=true&page=3&qid=1710233988&ref=sr_pg_3"
+url4 <-"https://www.amazon.co.uk/s?i=electronics&bbn=560798&rh=n%3A4085881&fs=true&page=4&qid=1710234052&ref=sr_pg_4"
+url5 <-"https://www.amazon.co.uk/s?i=electronics&bbn=560798&rh=n%3A4085881&fs=true&page=5&qid=1710234067&ref=sr_pg_5"
+
+session1 <- bow(url1, user_agent = "Educational Purposes")
+session2 <- bow(url2, user_agent = "Educational Purposes")
+session3 <- bow(url3, user_agent = "Educational Purposes")
+session4 <- bow(url4, user_agent = "Educational Purposes")
+session5 <- bow(url5, user_agent = "Educational Purposes")
+
+session1
+session2
+session3
+session4
+session5
+```
+Urls
+```{r}
+speaker_url1 <- read_html(url1)
+speaker_url2 <- read_html(url2)
+speaker_url3 <- read_html(url3)
+speaker_url4 <- read_html(url4)
+speaker_url5 <- read_html(url5)
+```
+Name scraping
+```{r}
+#First 20 Product Names
+speakerName1 <- speaker_url1 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+speakerName1
+
+subsetspeakerName1 <- speakerName1[1:20]
+subsetspeakerName1
+
+#Second 20 Product Names
+speakerName2 <- speaker_url2 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+speakerName2
+
+subsetspeakerName2 <- speakerName2[1:20]
+subsetspeakerName2
+
+#Third 20 Product Names
+speakerName3 <- speaker_url3 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+speakerName3
+
+subsetspeakerName3 <- speakerName3[1:20]
+subsetspeakerName3
+
+#Fourth 20 Product Names
+speakerName4 <- speaker_url4 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+speakerName4
+
+subsetspeakerName4 <- speakerName4[1:20]
+subsetspeakerName4
+#Fifth 20 Product Names
+speakerName5 <- speaker_url5 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+speakerName5
+
+subsetspeakerName5 <- speakerName5[1:20]
+subsetspeakerName5
+```
+Price scraping for the 100 product price for Nintendo switch
+```{r}
+library(rvest)
+
+#Scrape 100 Product Price of Speaker
+speakerPrice <- speaker_url1%>%
+  html_nodes("span.a-price")%>%
+  html_text()
+
+subsetPricespeaker1 <- speakerPrice[1:20]
+subsetPricespeaker1
+
+speakerPrice2 <- speaker_url2 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetPricespeaker2 <- speakerPrice[1:20]
+subsetPricespeaker2
+
+speakerPrice3 <- speaker_url3%>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetPricespeaker3 <- speakerPrice[1:20]
+subsetPricespeaker3
+
+speakerPrice4 <- speaker_url4 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetPricespeaker4 <- speakerPrice[1:20]
+subsetPricespeaker4
+
+speakerPrice5 <- speaker_url5 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetPricespeaker5 <- speakerPrice[1:20]
+subsetPricespeaker5
+```
+Scraping for Speaker Ratings
+```{r}
+#Scrape for Speaker Ratings
+speakerRatings1 <- speaker_url1 %>%
+  html_nodes("i.a-icon.a-icon-star-small.a-star-small-4-5.aok-align-bottom") %>%
+  html_text()
+
+speakerRatings1 <- speakerRatings1[1:20]
+speakerRatings1
+
+speakerRatings2 <- speaker_url2 %>%
+  html_nodes("i.a-icon.a-icon-star-small.a-star-small-4-5.aok-align-bottom") %>%
+  html_text()
+
+speakerRatings2 <- speakerRatings2[1:20]
+speakerRatings2
+
+speakerRatings3 <- speaker_url3 %>%
+  html_nodes("i.a-icon.a-icon-star-small.a-star-small-4-5.aok-align-bottom") %>%
+  html_text()
+
+speakerRatings3 <- speakerRatings3[1:20]
+speakerRatings3
+
+speakerRatings4 <- speaker_url4 %>%
+  html_nodes("i.a-icon.a-icon-star-small.a-star-small-4-5.aok-align-bottom") %>%
+  html_text()
+
+speakerRatings4 <- speakerRatings4[1:20]
+speakerRatings4
+
+speakerRatings5 <- speaker_url5 %>%
+  html_nodes("i.a-icon.a-icon-star-small.a-star-small-4-5.aok-align-bottom") %>%
+  html_text()
+
+speakerRatings5 <- speakerRatings5[1:20]
+speakerRatings5
+```
+Scraping for the 100 Products Reviews of Speaker
+```{r}
+#Scrape 100 Products Reviews
+speakerReview1 <- speaker_url1 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+#1st subset get only 20 Product Reviews
+subsetspeakerRev1 <- speakerReview1[1:20]
+subsetspeakerRev1
+
+speakerReview2 <- speaker_url2 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+#2nd subset get only 20 Product Reviews
+subsetspeakerRev2 <- speakerReview2[1:20]
+subsetspeakerRev2
+
+speakerReview3 <- speaker_url3 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+#3rd subset to get only 20 Product Reviews
+subsetspeakerRev3 <- speakerReview3[1:20]
+subsetspeakerRev3
+
+speakerReview4 <- speaker_url4 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+#4th subset to get only 20 Product Reviews
+subsetspeakerRev4 <- speakerReview4[1:20]
+subsetspeakerRev4
+
+speakerReview5 <- speaker_url5 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+#5th subset to get only 20 Product Reviews
+subsetspeakerRev5 <- speakerReview5[1:20]
+subsetspeakerRev5
+```
+1st 20 products Data Frame
+```{r}
+Product1 <- data.frame(speakerName= subsetspeakerName1,
+                       speakerPrice= subsetPricespeaker1,
+                       speakerRatings= speakerRatings1,
+                       speakerReview= subsetspeakerRev1)
+Product1
+
+write.csv(Product1, "Product1.csv")
+read.csv("Product1.csv")
+```
+
+
+
+```
