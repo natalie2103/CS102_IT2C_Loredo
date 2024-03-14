@@ -380,5 +380,119 @@ write.csv(keyboardProduct, "keyboardProducts.csv")
 read.csv("keyboardProducts.csv")
 ```
 
+```{r}
+productUrl1 <- "https://www.amazon.com.au/product-reviews/B086WCG4SR/ref=cm_cr_arp_d_viewopt_srt/358-8254970-8794523?pd_rd_w=1SxUI&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=VX1KZQGA39ET6N51N4EP&pd_rd_wg=gaSN9&pd_rd_r=e92d4990-3f8e-486c-aebc-96f58ad50280&pd_rd_i=B086WCG4SR&pageNumber=1&sortBy=recent"
 
+productUrl2 <- "https://www.amazon.com.au/product-reviews/B09TDTJKF1/ref=cm_cr_arp_d_viewopt_srt?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&sortBy=recent&pageNumber=1#reviews-filter-bar"
 
+sessionRev1 <- bow(productUrl1, user_agent = "Educational Purposes")
+sessionRev2 <- bow(productUrl2, user_agent = "Educational Purposes")
+
+productRead <- read_html(productUrl1)
+productRead2 <- read_html(productUrl2)
+```
+
+```{r}
+productRevName1 <- productRead %>%
+  html_nodes("h1.a-size-large.a-text-ellipsis") %>%
+  html_text()
+productRevName1
+
+productReviewer <- productRead %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+productReviewer
+
+subsetReviewer <- productReviewer[1:10]
+productDate <- productRead %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+subsetReviewer
+
+subsetDate <- productDate[1:10]
+subsetDate
+
+productReview <- productRead %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+productReview
+
+productReviewclean <- unlist(str_split(productReview, "\n"))
+productReviewclean <- productReviewclean[productReviewclean != ""]
+productReviewclean <- str_trim(productReviewclean)
+productReviewclean
+
+subsetproductReview <- productReviewclean[c(3, 7, 11, 15, 19, 23, 27, 31, 35, 39)]
+subsetproductReview
+
+productRating <- productRead %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+productRating
+
+productRatingsub <- productRating[1:10]
+```
+
+```{r}
+productRevname2 <- productRead2 %>%
+  html_nodes("h1.a-size-large.a-text-ellipsis") %>%
+  html_text()
+productRevname2
+
+productReviewer2 <- productRead2 %>%
+  html_nodes("span.a-profile-name") %>%
+  html_text()
+productReviewer2
+
+subsetReviewer2 <- productReviewer2[1:10]
+
+productDate2 <- productRead2 %>%
+  html_nodes("span.review-date") %>%
+  html_text()
+
+subsetDate2 <- productDate2[1:10]
+subsetDate2
+
+productReview2 <- productRead2 %>%
+  html_nodes("span.a-size-base.review-text.review-text-content") %>%
+  html_text()
+productReview2
+
+productReviewclean2 <- unlist(str_split(productReview, "\n"))
+productReviewclean2 <-productReviewclean[productReviewclean != ""]
+productReviewclean2 <- str_trim(productReviewclean)
+
+subsetproductReview2 <- productReviewclean2[c(3, 7, 11, 15, 19, 23, 27, 31, 35, 39)]
+subsetproductReview2
+
+productRating2 <- productRead2 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+productRating2
+productRatingsub2 <- productRating2[1:10]
+```
+
+```{r}
+mixproductReviewer <- c(subsetReviewer, subsetReviewer2)
+mixproductReviewer
+
+mixproductDate <- c(subsetDate, subsetDate2)
+
+mixproductReview <- c(subsetproductReview, subsetproductReview2)
+
+mixproductRating <- c(productRatingsub, productRatingsub2)
+```
+
+```{r}
+ProductReviewsdf <- data.frame(productname = productRevName1,
+                               productreviewer = mixproductReviewer,
+                               datereviewed = mixproductDate,
+                               reviews = mixproductReview,
+                               rating = mixproductRating)
+ProductReviewsdf
+
+write.csv(ProductReviewsdf, "ProductReviewsdf.csv")
+read.csv("ProductReviewsdf.csv") 
+```
+
+```
