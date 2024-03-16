@@ -323,33 +323,78 @@ keyboardName1 <-keyboard_url1 %>%
   html_text()
 keyboardName1
 
+subsetkeyboardName1 <- keyboardName1[1:20]
+subsetkeyboardName1
+
 keyboardName2 <-keyboard_url2 %>%
   html_nodes("span.a-color-base.a-text-normal")%>%
   html_text()
 keyboardName2
 
-mixkeyboardNames <- c(keyboardName1, keyboardName1)
-subsetkeyboarNames <- mixkeyboardNames[1:24]
+subsetkeyboardName2 <- keyboardName2[1:20]
+subsetkeyboardName2
 
-keyboardNames <- data.frame(subsetkeyboarNames)
+keyboardName3 <- keyboard_url3 %>%
+  html_nodes("span.a-color-base.a-text-normal") %>%
+  html_text()
+subsetkeyboardName3 <- head(keyboardName3, 20)
+
+#Fourth 20 Product Names
+keyboardName4 <- keyboard_url4 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+keyboardName4
+
+subsetkeyboardName4 <- keyboardName4[1:20]
+subsetkeyboardName4
+#Fifth 20 Product Names
+keyboardName5 <- keyboard_url5 %>%
+  html_nodes("span.a-color-base.a-text-normal")%>%
+  html_text()
+keyboardName5
+
+subsetkeyboardName5 <- keyboardName5[1:20]
+subsetkeyboardName5
+
+all_names <- c(subsetkeyboardName1, subsetkeyboardName2, subsetkeyboardName3, subsetkeyboardName4, subsetkeyboardName5)
+
+keyboardNames <- data.frame(Names = all_names)
+
+print(keyboardNames)
 ```
 
 ```{r}
 keyboardPrice1 <- keyboard_url1 %>%
   html_nodes("span.a-price") %>%
   html_text()
-keyboardPrice1
 
-subsetkeyboardPrice1 <- keyboardPrice1[1:20]
+subsetkeyboardPrice1 <- head(keyboardPrice1, 20)
 
 keyboardPrice2 <- keyboard_url2 %>%
   html_nodes("span.a-price") %>%
   html_text()
-keyboardPrice2
 
-subsetkeyboardPrice2 <- keyboardPrice2[1:20]
+subsetkeyboardPrice2 <- head(keyboardPrice2, 20)
 
-all_prices <- c(subsetkeyboardPrice1, subsetkeyboardPrice2)
+keyboardPrice3 <- keyboard_url3 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetkeyboardPrice3 <- head(keyboardPrice3, 20)
+
+keyboardPrice4 <- keyboard_url4 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetkeyboardPrice4 <- head(keyboardPrice4, 20)
+
+keyboardPrice5 <- keyboard_url5 %>%
+  html_nodes("span.a-price") %>%
+  html_text()
+
+subsetkeyboardPrice5 <- head(keyboardPrice5, 20)
+
+all_prices <- c(subsetkeyboardPrice1, subsetkeyboardPrice2, subsetkeyboardPrice3, subsetkeyboardPrice4, subsetkeyboardPrice5)
 
 keyboardPrices <- data.frame(Prices = all_prices)
 
@@ -360,21 +405,38 @@ print(keyboardPrices)
 keyboardRatings1 <- keyboard_url1 %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
-keyboardRatings1
 
-subsetkeyboardRatings <- keyboardRatings1[1:70]
+subsetkeyboardRatings1 <- head(keyboardRatings1, 20)
 
 keyboardRatings2 <- keyboard_url2 %>%
   html_nodes("span.a-icon-alt") %>%
   html_text()
-keyboardRatings2
 
-subsetkeyboardRatings2 <- keyboardRatings2[1:69]
+subsetkeyboardRatings2 <- head(keyboardRatings2, 20)
 
-mixkeyboardRatings <- c(subsetkeyboardRatings, subsetkeyboardRatings2)
-subsetkeyboardRatings <- mixkeyboardRatings[1:100]
+keyboardRatings3 <- keyboard_url3 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
 
-keyboardRates <- data.frame(subsetkeyboardRatings)
+subsetkeyboardRatings3 <- head(keyboardRatings3, 20)
+
+keyboardRatings4 <- keyboard_url4 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+subsetkeyboardRatings4 <- head(keyboardRatings4, 20)
+
+keyboardRatings5 <- keyboard_url5 %>%
+  html_nodes("span.a-icon-alt") %>%
+  html_text()
+
+subsetkeyboardRatings5 <- head(keyboardRatings5, 20)
+
+all_ratings <- c(subsetkeyboardRatings1, subsetkeyboardRatings2, subsetkeyboardRatings3, subsetkeyboardRatings4, subsetkeyboardRatings5)
+
+keyboardRatings <- data.frame(Ratings = all_ratings)
+
+print(keyboardRatings)
 ```
 
 ```{r}
@@ -382,21 +444,101 @@ keyboardReview1 <- keyboard_url1 %>%
   html_nodes("span.a-size-base.s-underline-text") %>%
   html_text()
 
+subsetkeyboardRev1 <- keyboardReview1[1:20]
+subsetkeyboardRev1
+
 keyboardReview2 <- keyboard_url2 %>%
   html_nodes("span.a-size-base.s-underline-text") %>%
   html_text()
 
-mixkeyboardReview <- c(keyboardReview1, keyboardReview2)
-subsetkeyboardReview <- mixkeyboardReview[1:100]
+subsetkeyboardRev2 <- keyboardReview2[1:20]
+subsetkeyboardRev2
 
-keyboardReviews <- data.frame(subsetkeyboardReview)
+keyboardReview3 <- keyboard_url3 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+subsetkeyboardRev3 <- head(keyboardReview3, 20)
+
+keyboardReview4 <- keyboard_url4 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+subsetkeyboardRev4 <- keyboardReview4[1:20]
+subsetkeyboardRev4
+
+keyboardReview5 <- keyboard_url5 %>%
+  html_nodes("span.a-size-base.s-underline-text") %>%
+  html_text()
+
+subsetkeyboardRev5 <- keyboardReview5[1:20]
+subsetkeyboardRev5
+
+all_reviews <- c(subsetkeyboardRev1, subsetkeyboardRev2, subsetkeyboardRev3, subsetkeyboardRev4, subsetkeyboardRev5)
+
+keyboardReviews <- data.frame(Reviews = all_reviews)
+
+print(keyboardReviews)
 ```
 
 ```{r}
+keyboardProduct1 <- data.frame(Name = subsetkeyboardName1,
+                               speakerPrice = subsetkeyboardPrice1,
+                               speakerRatings = subsetkeyboardRatings1,
+                               speakerReview = subsetkeyboardRev1)
+print(keyboardProduct1)
 
-keyboardProduct <- bind_rows(keyboardNames, keyboardPrices, keyboardRates, keyboardReviews)
+write.csv(keyboardProduct1, "keyboardProduct1.csv")
+read.csv("keyboardProduct1.csv")
+```
 
-write.csv(keyboardProduct, "keyboardProducts.csv")
+```{r}
+keyboardProduct2 <- data.frame(Name = subsetkeyboardName2,
+                               speakerPrice = subsetkeyboardPrice2,
+                               speakerRatings = subsetkeyboardRatings2,
+                               speakerReview = subsetkeyboardRev2)
+print(keyboardProduct2)
+
+write.csv(keyboardProduct2, "keyboardProduct2.csv")
+read.csv("keyboardProduct2.csv")
+```
+
+```{r}
+keyboardProduct3 <- data.frame(Name = subsetkeyboardName3,
+                               speakerPrice = subsetkeyboardPrice3,
+                               speakerRatings = subsetkeyboardRatings3,
+                               speakerReview = subsetkeyboardRev3)
+print(keyboardProduct3)
+
+write.csv(keyboardProduct3, "keyboardProduct3.csv")
+read.csv("keyboardProduct3.csv")
+```
+
+```{r}
+keyboardProduct4 <- data.frame(Name = subsetkeyboardName4,
+                               speakerPrice = subsetkeyboardPrice4,
+                               speakerRatings = subsetkeyboardRatings4,
+                               speakerReview = subsetkeyboardRev4)
+print(keyboardProduct4)
+
+write.csv(keyboardProduct4, "keyboardProduct4.csv")
+read.csv("keyboardProduct4.csv")
+```
+```{r}
+keyboardProduct5 <- data.frame(Name = subsetkeyboardName5,
+                               speakerPrice = subsetkeyboardPrice5,
+                               speakerRatings = subsetkeyboardRatings5,
+                               speakerReview = subsetkeyboardRev5)
+print(keyboardProduct5)
+
+write.csv(keyboardProduct5, "keyboardProduct5.csv")
+read.csv("keyboardProduct5.csv")
+```
+Combine all csv products
+```{r}
+keyboardProducts <- bind_rows(keyboardProduct1, keyboardProduct2, keyboardProduct3, keyboardProduct4, keyboardProduct5)
+keyboardProducts
+
+write.csv(keyboardProducts, "keyboardProducts.csv")
 read.csv("keyboardProducts.csv")
 ```
 
