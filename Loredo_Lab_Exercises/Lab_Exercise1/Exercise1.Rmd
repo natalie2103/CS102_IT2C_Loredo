@@ -129,6 +129,12 @@ speakerPrice5 <- speaker_url5 %>%
 
 subsetPricespeaker5 <- speakerPrice[1:20]
 subsetPricespeaker5
+
+all_prices <- c(subsetPricespeaker1, subsetPricespeaker2, subsetPricespeaker3, subsetPricespeaker4, subsetPricespeaker5)
+
+speakerPrices <- data.frame(Prices = all_prices)
+
+print(speakerPrices)
 ```
 Scraping for Speaker Ratings
 ```{r}
@@ -167,6 +173,12 @@ speakerRatings5 <- speaker_url5 %>%
 
 speakerRatings5 <- speakerRatings5[1:20]
 speakerRatings5
+
+all_ratings <- c(speakerRatings1, speakerRatings2, speakerRatings3, speakerRatings4, speakerRatings5)
+
+speakerRatings <- data.frame(Ratings = all_ratings)
+
+print(speakerRatings)
 ```
 Scraping for the 100 Products Reviews of Speaker
 ```{r}
@@ -205,6 +217,12 @@ speakerReview5 <- speaker_url5 %>%
 #5th subset to get only 20 Product Reviews
 subsetspeakerRev5 <- speakerReview5[1:20]
 subsetspeakerRev5
+
+all_reviews <- c(subsetspeakerRev1, subsetspeakerRev2, subsetspeakerRev3, subsetspeakerRev4, subsetspeakerRev5)
+
+speakerReviews <- data.frame(Reviews = all_reviews)
+
+print(speakerReviews)
 ```
 1st 20 products Data Frame
 ```{r}
@@ -270,6 +288,7 @@ speakerProducts
 write.csv(speakerProducts, "speakerProducts.csv")
 read.csv("speakerProducts.csv")
 ```
+
 ```{r}
 Url1 <- "https://www.amazon.co.uk/s?k=keyboard&rh=n%3A949408031&ref=nb_sb_noss"
 Url2 <- "https://www.amazon.co.uk/s?k=keyboard&i=electronics&rh=n%3A949408031&page=2&qid=1710334196&ref=sr_pg_2"
@@ -310,7 +329,7 @@ keyboardName2 <-keyboard_url2 %>%
 keyboardName2
 
 mixkeyboardNames <- c(keyboardName1, keyboardName1)
-subsetkeyboarNames <- mixkeyboardNames[1:100]
+subsetkeyboarNames <- mixkeyboardNames[1:24]
 
 keyboardNames <- data.frame(subsetkeyboarNames)
 ```
@@ -321,19 +340,20 @@ keyboardPrice1 <- keyboard_url1 %>%
   html_text()
 keyboardPrice1
 
-subsetkeyboardPrice1 <- keyboardPrice1[1:70]
+subsetkeyboardPrice1 <- keyboardPrice1[1:20]
 
 keyboardPrice2 <- keyboard_url2 %>%
   html_nodes("span.a-price") %>%
   html_text()
 keyboardPrice2
 
-subsetkeyboardPrice2 <- keyboardPrice2[1:69]
+subsetkeyboardPrice2 <- keyboardPrice2[1:20]
 
-mixkeyboardPrices <- c(subsetkeyboardPrice1, subsetkeyboardPrice2)
-subsetkeyboardPrices <- mixkeyboardPrices[1:100]
+all_prices <- c(subsetkeyboardPrice1, subsetkeyboardPrice2)
 
-keyboardPrices <- data.frame(subsetkeyboardPrices)
+keyboardPrices <- data.frame(Prices = all_prices)
+
+print(keyboardPrices)
 ```
 
 ```{r}
