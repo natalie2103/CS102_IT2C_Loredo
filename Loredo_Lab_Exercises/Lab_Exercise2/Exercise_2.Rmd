@@ -1,0 +1,87 @@
+---
+title: "Exercise_2.Rmd"
+author: "Natalie Joy Loredo"
+date: "2024-03-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+24/50 PRODUCTS
+```{r}
+#Get the First 24 Products in 50 Products
+
+library(rvest)
+library(dplyr)
+library(polite)
+library(stringr) 
+library(httr)
+
+products1 <- "https://www.amazon.com.au/s?bbn=4851799051&rh=n%3A6035839051&language=en_AU&_encoding=UTF8&brr=1&content-id=amzn1.sym.b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pd_rd_r=708b8da9-4d12-4c9c-b945-e5349e7120c8&pd_rd_w=AsqeN&pd_rd_wg=r572i&pf_rd_p=b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pf_rd_r=2EVHVJ7QKDNTJEC8HDFT&rd=1&ref=Oct_d_odnav_d_4885206051_0"
+
+session <- bow(products1, user_agent = "Educational Purposes")
+session
+
+firstProducts <- read_html(products1)
+
+#Subset 24 products
+firstset <- firstProducts %>%
+    html_nodes("h2") %>%
+    html_text()
+firstset
+
+subsetfirstproducts1 <- firstset[1:24]
+subsetfirstproducts1
+```
+
+```{r}
+products2 <- "https://www.amazon.com.au/s?i=electronics&bbn=4851799051&rh=n%3A6035839051&page=2&language=en_AU&_encoding=UTF8&brr=1&content-id=amzn1.sym.b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pd_rd_r=708b8da9-4d12-4c9c-b945-e5349e7120c8&pd_rd_w=AsqeN&pd_rd_wg=r572i&pf_rd_p=b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pf_rd_r=2EVHVJ7QKDNTJEC8HDFT&qid=1709397899&rd=1&ref=sr_pg_1"
+
+session <- bow(products2, user_agent = "Educational Purposes")
+session
+
+firstProducts2 <- read_html(products2) 
+
+#Subset 26 products
+firstset2 <- firstProducts2 %>%
+    html_nodes("h2") %>%
+    html_text()
+firstset2
+
+subsetfirstproducts2 <- firstset2[1:24]
+subsetfirstproducts2
+```
+2/50
+```{r}
+#Get 2 Products to complete 50 Products
+products3 <- "https://www.amazon.com.au/s?i=electronics&bbn=4851799051&rh=n%3A6035839051&page=3&language=en_AU&_encoding=UTF8&brr=1&content-id=amzn1.sym.b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pd_rd_r=708b8da9-4d12-4c9c-b945-e5349e7120c8&pd_rd_w=AsqeN&pd_rd_wg=r572i&pf_rd_p=b8ed1d3c-2f91-48cc-baac-e6d8e7f439e4&pf_rd_r=2EVHVJ7QKDNTJEC8HDFT&qid=1709398205&rd=1&ref=sr_pg_2"
+
+session <- bow(products3, user_agent = "Educational Purposes")
+session
+
+products3 <- read_html(products3) 
+
+#Subset 2 products
+firstset3 <- products3 %>%
+    html_nodes("h2") %>%
+    html_text()
+firstset3
+
+subsetfirstsetproducts3 <- firstset3[1:2]
+subsetfirstsetproducts3
+```
+
+```{r}
+combinedproductsName <- data.frame(
+  productsName = c(subsetfirstproducts1, subsetfirstproducts2, subsetfirstsetproducts3)
+)
+combinedproductsName
+```
+write csv for 50 products
+```{r}
+write.csv(combinedproductsName, file = "50ProductsName.csv") 
+#load
+head(combinedproductsName)
+```
