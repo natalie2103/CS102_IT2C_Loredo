@@ -541,7 +541,6 @@ keyboardProducts
 write.csv(keyboardProducts, "keyboardProducts.csv")
 read.csv("keyboardProducts.csv")
 ```
-
 ```{r}
 productUrl1 <- "https://www.amazon.com.au/product-reviews/B086WCG4SR/ref=cm_cr_arp_d_viewopt_srt/358-8254970-8794523?pd_rd_w=1SxUI&content-id=amzn1.sym.26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_p=26572115-17fb-4b97-b3b1-43c572bafd8f&pf_rd_r=VX1KZQGA39ET6N51N4EP&pd_rd_wg=gaSN9&pd_rd_r=e92d4990-3f8e-486c-aebc-96f58ad50280&pd_rd_i=B086WCG4SR&pageNumber=1&sortBy=recent"
 
@@ -646,15 +645,65 @@ mixproductRating <- c(productRatingsub, productRatingsub2)
 ```
 
 ```{r}
-ProductReviewsdf <- data.frame(productname = productRevName1,
-                               productreviewer = mixproductReviewer,
-                               datereviewed = mixproductDate,
-                               reviews = mixproductReview,
-                               rating = mixproductRating)
-ProductReviewsdf
+#Check the lengths of all vectors
+lengths <- c(
+  length(productRevName1[1:15]),
+  length(productRevname2[1:15]),
+  length(subsetReviewer),
+  length(subsetReviewer2),
+  length(subsetDate),
+  length(subsetDate2),
+  length(subsetproductReview),
+  length(subsetproductReview2),
+  length(productRatingsub),
+  length(productRatingsub2)
+)
 
-write.csv(ProductReviewsdf, "ProductReviewsdf.csv")
-read.csv("ProductReviewsdf.csv") 
+#Find the minimum length
+min_length <- min(lengths)
+
+#Subset all vectors to the minimum length
+productRevName1 <- rep(productRevName1[1:min_length], each = 25) 
+productRevname2 <- rep(productRevname2[1:min_length], each = 25) 
+subsetReviewer <- subsetReviewer[1:min_length]
+subsetReviewer2 <- subsetReviewer2[1:min_length]
+subsetDate <- subsetDate[1:min_length]
+subsetDate2 <- subsetDate2[1:min_length]
+subsetproductReview <- subsetproductReview[1:min_length]
+subsetproductReview2 <- subsetproductReview2[1:min_length]
+productRatingsub <- productRatingsub[1:min_length]
+productRatingsub2 <- productRatingsub2[1:min_length]
+
+#Create the data frame with the corrected vectors
+combined_data <- data.frame(
+  productname = c(productRevName1, productRevname2),
+  productreviewer = c(subsetReviewer, subsetReviewer2),
+  datereviewed = c(subsetDate, subsetDate2),
+  reviews = c(subsetproductReview, subsetproductReview2),
+  rating = c(productRatingsub, productRatingsub2)
+)
+
+#Subset the combined data frame to 25 rows
+combined_data <- combined_data[1:50, ]
+
+#Print the corrected combined data frame
+print(combined_data)
+
+write.csv(combined_data, "combined_data.csv")
+read.csv("combined_data.csv")
+
 ```
 
+```{r}
+Moviesdf <- bind_rows( speakerProducts, 
+                  keyboardProducts,
+                   Movie3df, 
+                   Movie4df, 
+                  Movie5df, 
+                  Movie6df, 
+                  Movie7df,
+                  Movie8df, 
+                  Movie9df, 
+                 Movie10df)
+Moviesdf
 ```
