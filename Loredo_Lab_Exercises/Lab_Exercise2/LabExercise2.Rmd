@@ -1281,7 +1281,7 @@ combinedProducts6 <- data.frame(
 combinedProducts6
 
 #Product 6 csv
-write.csv(combinedProducts6, file = "6thProduct.csv")
+write.csv(combinedProducts6, file = "6thProducts.csv")
 ```
 Seventh Product
 ```{r}
@@ -1470,7 +1470,7 @@ combinedProducts7 <- data.frame(
 combinedProducts7
 
 #Product 7 csv 
-write.csv(combinedProducts7, file = "7thProduct.csv")
+write.csv(combinedProducts7, file = "7thProducts.csv")
 ```
 Eighth Product 
 ```{r}
@@ -1660,7 +1660,7 @@ combinedProducts8 <- data.frame(
 combinedProducts8
 
 #Product 8 Reviews
-write.csv(combinedProducts8, file = "8thProduct.csv")
+write.csv(combinedProducts8, file = "8thProducts.csv")
 ```
 Nineth Product
 ```{r}
@@ -1850,7 +1850,7 @@ combinedProducts9 <- data.frame(
 combinedProducts9
 
 #Product 9 Reviews
-write.csv(combinedProducts9, file = "9thProduct.csv")
+write.csv(combinedProducts9, file = "9thProducts.csv")
 ```
 Tenth Product
 ```{r}
@@ -2036,5 +2036,5 @@ combinedProducts10 <- data.frame(
 combinedProducts10
 
 #Product 10 Reviews
-write.csv(combinedProducts10, file = "10thProduct.csv")
+write.csv(combinedProducts10, file = "10thProducts.csv")
 ```
