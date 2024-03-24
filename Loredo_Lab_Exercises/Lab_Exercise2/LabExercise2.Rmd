@@ -5755,3 +5755,848 @@ combinedProducts30
 write.csv(combinedProducts30, file = "30thProduct.csv")
 head(combinedProducts30)
 ```
+Product 31
+```{r}
+URL31 <- "https://www.amazon.com.au/product-reviews/B09BN9WBTQ/ref=cm_cr_unknown?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=1#reviews-filter-bar"
+session <- bow(URL31, user_agent = "Educational Purposes")
+session
+
+url31 <- read_html(URL31)
+
+URL31.1 <- "https://www.amazon.com.au/product-reviews/B09BN9WBTQ/ref=cm_cr_getr_d_paging_btm_next_2?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=2#reviews-filter-bar"
+session <- bow(URL31.1, user_agent = "Educational Purposes")
+session
+
+url31.1 <- read_html(URL31.1)
+
+URL31.2 <- "https://www.amazon.com.au/product-reviews/B09BN9WBTQ/ref=cm_cr_getr_d_paging_btm_next_3?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=3#reviews-filter-bar"
+session <- bow(URL31.2, user_agent = "Educational Purposes")
+session
+
+url31.2 <- read_html(URL31.2)
+
+URL31.3 <- "https://www.amazon.com.au/product-reviews/B09BN9WBTQ/ref=cm_cr_getr_d_paging_btm_next_4?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=4#reviews-filter-bar"
+session <- bow(URL31.3, user_agent = "Educational Purposes")
+session
+
+url31.3 <- read_html(URL31.3)
+
+URL31.4 <- "https://www.amazon.com.au/product-reviews/B09BN9WBTQ/ref=cm_cr_getr_d_paging_btm_next_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=5#reviews-filter-bar"
+url31.4 <- read_html(URL31.4)
+```
+Product 31
+```{r}
+#Reviewers Names
+names31 <- url31%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text() 
+names31
+
+names31.1 <- url31.1%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names31.1 <- names31.1[3:11] 
+names31.1
+
+names31.2 <- url31.2%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names31.2 <- names31.2[3:9] 
+names31.2
+
+names31.3 <- url31.3%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names31.3 <- names31.3[3:12]
+names31.3
+
+#Type of Purchase 
+purchasetype31 <- url31%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+ 
+purchasetype31.1 <- url31.1%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype31.2 <- url31.2%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype31.3 <- url31.3%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype31.4 <- url31.4%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+#Date of Reviews
+daterev31 <- url31%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev31.1 <- url31.1%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev31.2 <- url31.2%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev31.3 <- url31.3%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev31.4 <- url31.4%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+#Subset
+daterevs31.3 <- daterev31.4[1:20]
+
+#Individual Ratings 
+rates31 <- url31%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates31.1 <- url31.1%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates31.2 <- url31.2%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates31.3 <- url31.3%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates31.4 <- url31.4%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+#Reviews
+reviews31 <- url31%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews31.1 <- url31.1%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews31.2 <- url31.2%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>%
+    gsub("\\n", "", .)
+
+reviews31.3 <- url31.3%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews31.3 <- reviews31.3[1:12]   
+
+reviews31.4 <- url31.4%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews31.4 <- reviews31.4[1:10]
+
+#Data Frames
+dataname31 <- data.frame(
+    ReviewerName = c(names31, names31.1, names31.2, names31.3)[1:50]
+)
+
+datapurchaseType31 <- data.frame(
+    TypeOfPurchase = c(purchasetype31, purchasetype31.1, purchasetype31.2, purchasetype31.3, purchasetype31.4)[1:50]
+)
+
+dataDate31 <- data.frame(
+    Date = c(daterev31, daterev31.1, daterev31.2, daterev31.3)[1:50]
+)
+
+rate31 <- data.frame(
+    IndividualRating = c(rates31, rates31.1, rates31.2, rates31.3)[1:50]
+)
+
+review_dataframe31 <- data.frame(
+    ReviewText = c(reviews31, reviews31.1, reviews31.2, reviews31.3, reviews31.4)[1:50]
+) 
+
+pro31 <- rep(subset24products2[7], 50)
+
+combinedProducts31 <- data.frame( 
+    Product = pro31,
+    ReviewerName = dataname31$ReviewerName,
+    TypeOfPurchase = datapurchaseType31$TypeOfPurchase,
+    Date = dataDate31$Date,
+    IndividualRating = rate31$IndividualRating,
+    ReviewText = review_dataframe31$ReviewText
+)
+combinedProducts31
+
+#Product 31
+write.csv(combinedProducts31, file = "31stProduct.csv")
+head(combinedProducts31)
+```
+Product 32
+```{r}
+URL32 <- "https://www.amazon.com.au/product-reviews/B07Q1BTKZT/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL32, user_agent = "Educational Purposes")
+session
+
+url32 <- read_html(URL32)
+
+URL32.1 <- "https://www.amazon.com.au/product-reviews/B07Q1BTKZT/ref=cm_cr_arp_d_paging_btm_next_2?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=2#reviews-filter-bar"
+session <- bow(URL32.1, user_agent = "Educational Purposes")
+session
+
+url32.1 <- read_html(URL32.1)
+
+URL32.2 <- "https://www.amazon.com.au/product-reviews/B07Q1BTKZT/ref=cm_cr_arp_d_paging_btm_next_3?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=3#reviews-filter-bar"
+session <- bow(URL32.2, user_agent = "Educational Purposes")
+session
+
+url32.2 <- read_html(URL32.2)
+
+URL32.3 <- "https://www.amazon.com.au/product-reviews/B07Q1BTKZT/ref=cm_cr_arp_d_paging_btm_next_4?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=4#reviews-filter-bar"
+session <- bow(URL32.3, user_agent = "Educational Purposes")
+session
+
+url32.3 <- read_html(URL32.3)
+
+URL32.4 <- "https://www.amazon.com.au/product-reviews/B07Q1BTKZT/ref=cm_cr_arp_d_paging_btm_next_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=5#reviews-filter-bar"
+url32.4 <- read_html(URL32.4)
+```
+Product 32
+```{r}
+#Reviewers Names
+names32 <- url32%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text() 
+names32
+
+names32.1 <- url32.1%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names32.1 <- names32.1[3:11] 
+names32.1
+
+names32.2 <- url32.2%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names32.2 <- names32.2[3:9] 
+names32.2
+
+names32.3 <- url32.3%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names32.3 <- names32.3[3:12]
+names32.3
+
+#Type of Purchase 
+purchasetype32 <- url32%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype32.1 <- url32.1%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype32.2 <- url32.2%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype32.3 <- url32.3%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype32.4 <- url32.4%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+#Date of Reviews 
+daterev32 <- url32%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev32.1 <- url32.1%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev32.2 <- url32.2%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev32.3 <- url32.3%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev32.4 <- url32.4%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+#Subset
+daterevs32.3 <- daterev32.4[1:20]
+
+#Individual Ratings 
+rates32 <- url32%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+ 
+rates32.1 <- url32.1%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates32.2 <- url32.2%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+ 
+rates32.3 <- url32.3%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates32.4 <- url32.4%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+#Reviews
+reviews32 <- url32%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews32.1 <- url32.1%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews32.2 <- url32.2%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>%
+    gsub("\\n", "", .)
+
+reviews32.3 <- url32.3%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews32.3 <- reviews32.3[1:12]   
+
+reviews32.4 <- url32.4%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews32.4 <- reviews32.4[1:10] 
+
+dataname32 <- data.frame(
+    ReviewerName = c(names32, names32.1, names32.2, names32.3)[1:50]
+)
+
+datapurchaseType32 <- data.frame(
+    TypeOfPurchase = c(purchasetype32, purchasetype32.1, purchasetype32.2, purchasetype32.3, purchasetype32.4)[1:50]
+)
+
+dataDate32 <- data.frame(
+    Date = c(daterev32, daterev32.1, daterev32.2, daterev32.3)[1:50]
+)
+
+rate32 <- data.frame(
+    IndividualRating = c(rates32, rates32.1, rates32.2, rates32.3)[1:50]
+)
+
+review_dataframe32 <- data.frame(
+    ReviewText = c(reviews32, reviews32.1, reviews32.2, reviews32.3, reviews32.4)[1:50]
+) 
+
+pro32 <- rep(subset24products2[8], 50)
+
+combinedProducts32 <- data.frame( 
+    Product = pro32,
+    ReviewerName = dataname32$ReviewerName,
+    TypeOfPurchase = datapurchaseType32$TypeOfPurchase,
+    Date = dataDate32$Date,
+    IndividualRating = rate32$IndividualRating,
+    ReviewText = review_dataframe32$ReviewText
+)
+combinedProducts32
+
+#Product 32 csv
+write.csv(combinedProducts32, file = "32ndProduct.csv")
+```
+Product 33
+```{r}
+URL33 <- "https://www.amazon.com.au/product-reviews/B0CGZJDY84/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL33, user_agent = "Educational Purposes")
+session
+
+url33 <- read_html(URL33)
+
+URL33.1 <- "https://www.amazon.com.au/product-reviews/B0CGZJDY84/ref=cm_cr_arp_d_paging_btm_next_2?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=2#reviews-filter-bar"
+session <- bow(URL33.1, user_agent = "Educational Purposes")
+session
+
+url33.1 <- read_html(URL33.1)
+
+URL33.2 <- "https://www.amazon.com.au/product-reviews/B0CGZJDY84/ref=cm_cr_arp_d_paging_btm_next_3?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=3#reviews-filter-bar"
+session <- bow(URL33.2, user_agent = "Educational Purposes")
+session
+
+url33.2 <- read_html(URL33.2)
+
+URL33.3 <- "https://www.amazon.com.au/product-reviews/B0CGZJDY84/ref=cm_cr_arp_d_paging_btm_next_4?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=4#reviews-filter-bar"
+session <- bow(URL33.3, user_agent = "Educational Purposes")
+session
+
+url33.3 <- read_html(URL33.3)
+
+URL33.4 <- "https://www.amazon.com.au/product-reviews/B0CGZJDY84/ref=cm_cr_arp_d_paging_btm_next_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=5#reviews-filter-bar"
+url33.4 <- read_html(URL33.4)
+```
+Product 33
+```{r}
+#Reviewers Names
+names33 <- url33%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text() 
+names33
+
+names33.1 <- url33.1%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names33.1 <- names33.1[3:11] 
+names33.1
+
+names33.2 <- url33.2%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names33.2 <- names33.2[3:9] 
+names33.2
+
+names33.3 <- url33.3%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names33.3 <- names33.3[3:12]
+names33.3
+
+#Type of Purchase 
+purchasetype33 <- url33%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype33.1 <- url33.1%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype33.2 <- url33.2%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype33.3 <- url33.3%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+ 
+purchasetype33.4 <- url33.4%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+#Date of Reviews  
+daterev33 <- url33%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev33.1 <- url33.1%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev33.2 <- url33.2%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev33.3 <- url33.3%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev33.4 <- url33.4%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+#Subset 
+daterevs33.3 <- daterev33.4[1:20]
+
+#Individual Ratings 
+rates33 <- url33%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates33.1 <- url33.1%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates33.2 <- url33.2%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates33.3 <- url33.3%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates33.4 <- url33.4%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+#Reviews
+reviews33 <- url33%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews33.1 <- url33.1%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews33.2 <- url33.2%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>%
+    gsub("\\n", "", .)
+
+reviews33.3 <- url33.3%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews33.3 <- reviews33.3[1:12]   
+
+reviews33.4 <- url33.4%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews33.4 <- reviews33.4[1:10]
+
+#Data Frames
+dataname33 <- data.frame(
+    ReviewerName = c(names33, names33.1, names33.2, names33.3)[1:50]
+)
+
+datapurchaseType33 <- data.frame(
+    TypeOfPurchase = c(purchasetype33, purchasetype33.1, purchasetype33.2, purchasetype33.3, purchasetype33.4)[1:50]
+)
+
+dataDate33 <- data.frame(
+    Date = c(daterev33, daterev33.1, daterev33.2, daterev33.3)[1:50]
+)
+
+rate33 <- data.frame(
+    IndividualRating = c(rates33, rates33.1, rates33.2, rates33.3)[1:50]
+)
+
+review_dataframe33 <- data.frame(
+    ReviewText = c(reviews33, reviews33.1, reviews33.2, reviews33.3, reviews33.4)[1:50]
+) 
+
+pro33 <- rep(subset24products2[9],50)
+
+combinedProducts33 <- data.frame( 
+    Product = pro33,
+    ReviewerName = dataname33$ReviewerName,
+    TypeOfPurchase = datapurchaseType33$TypeOfPurchase,
+    Date = dataDate33$Date,
+    IndividualRating = rate33$IndividualRating,
+    ReviewText = review_dataframe33$ReviewText
+)
+combinedProducts33
+
+#Product 33 csv
+write.csv(combinedProducts33, file = "33rdProduct.csv")
+head(combinedProducts33)
+```
+Product 34
+```{r}
+URL34 <- "https://www.amazon.com.au/product-reviews/B0CFXWNPP2/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL34, user_agent = "Educational Purposes")
+session
+
+url34 <- read_html(URL34)
+
+URL34.1 <- "https://www.amazon.com.au/product-reviews/B0CFXWNPP2/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL34.1, user_agent = "Educational Purposes")
+session
+
+url34.1 <- read_html(URL34.1)
+
+URL34.2 <- "https://www.amazon.com.au/product-reviews/B0CFXWNPP2/ref=acr_search_hist_4?ie=UTF8&filterByStar=four_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL34.2, user_agent = "Educational Purposes")
+session
+
+url34.2 <- read_html(URL34.2)
+
+URL34.3 <- "https://www.amazon.com.au/product-reviews/B0CFXWNPP2/ref=acr_search_hist_5?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews#reviews-filter-bar"
+session <- bow(URL34.3, user_agent = "Educational Purposes")
+session
+
+url34.3 <- read_html(URL34.3)
+
+URL34.4 <- "https://www.amazon.com.au/product-reviews/B0CFXWNPP2/ref=acr_search_hist_3?ie=UTF8&filterByStar=three_star&reviewerType=all_reviews#reviews-filter-bar"
+url34.4 <- read_html(URL34.4)
+```
+Product 34
+```{r}
+#Reviewers Names
+names34 <- url34%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text() 
+names34
+
+names34.1 <- url34.1%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names34.1 <- names34.1[3:11] 
+names34.1
+
+names34.2 <- url34.2%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names34.2 <- names34.2[3:9] 
+names34.2
+
+names34.3 <- url34.3%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names34.3 <- names34.3[3:12]
+names34.3
+
+#Type of Purchase 
+purchasetype34 <- url34%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype34.1 <- url34.1%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype34.2 <- url34.2%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype34.3 <- url34.3%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+ 
+purchasetype34.4 <- url34.4%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+#Date of Reviews 
+daterev34 <- url34%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev34.1 <- url34.1%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev34.2 <- url34.2%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev34.3 <- url34.3%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev34.4 <- url34.4%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+#Subset 
+daterevs34.3 <- daterev34.4[1:20]
+
+#Individual Ratings 
+rates34 <- url34%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+ 
+rates34.1 <- url34.1%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates34.2 <- url34.2%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+ 
+rates34.3 <- url34.3%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates34.4 <- url34.4%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+#Reviews
+reviews34 <- url34%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews34.1 <- url34.1%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews34.2 <- url34.2%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>%
+    gsub("\\n", "", .)
+
+reviews34.3 <- url34.3%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews34.3 <- reviews34.3[1:12]   
+
+reviews34.4 <- url34.4%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text()  %>%
+    gsub("\\n", "", .)
+reviews34.4 <- reviews34.4[1:10]
+
+#Data Frames
+dataname34 <- data.frame(
+    ReviewerName = c(names34, names34.1, names34.2, names34.3)[1:50]
+)
+
+datapurchaseType34 <- data.frame(
+    TypeOfPurchase = c(purchasetype34, purchasetype34.1, purchasetype34.2, purchasetype34.3, purchasetype34.4)[1:50]
+)
+
+dataDate34 <- data.frame(
+    Date = c(daterev34, daterev34.1, daterev34.2, daterev34.3)[1:50]
+)
+
+rate34 <- data.frame(
+    IndividualRating = c(rates34, rates34.1, rates34.2, rates34.3)[1:50]
+)
+
+review_dataframe34 <- data.frame(
+    ReviewText = c(reviews34, reviews34.1, reviews34.2, reviews34.3, reviews34.4)[1:50]
+) 
+
+pro34 <- rep(subset24products2[10],50)
+
+combinedProducts34 <- data.frame( 
+    Product = pro34,
+    ReviewerName = dataname34$ReviewerName,
+    TypeOfPurchase = datapurchaseType34$TypeOfPurchase,
+    Date = dataDate34$Date,
+    IndividualRating = rate34$IndividualRating,
+    ReviewText = review_dataframe34$ReviewText
+)
+combinedProducts34
+
+#Product 34 csv
+write.csv(combinedProducts34, file = "34thProduct.csv") 
+head(combinedProducts34)
+```
+Product 35
+```{r}
+URL35 <- "https://www.amazon.com.au/product-reviews/B07S8R1LBJ/ref=cm_cr_unknown?ie=UTF8&filterByStar=four_star&reviewerType=all_reviews&pageNumber=1#reviews-filter-bar"
+session <- bow(URL35, user_agent = "Educational Purposes")
+session
+
+url35 <- read_html(URL35)
+
+URL35.1 <- "https://www.amazon.com.au/product-reviews/B07S8R1LBJ/ref=cm_cr_unknown?ie=UTF8&filterByStar=five_star&reviewerType=all_reviews&pageNumber=1#reviews-filter-bar"
+session <- bow(URL35.1, user_agent = "Educational Purposes")
+session
+
+url35.1 <- read_html(URL35.1)
+```
+Product 35
+```{r}
+#Reviewers Names
+names35 <- url35%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text() 
+names35
+
+names35.1 <- url35.1%>%
+    html_nodes("div.a-profile-content") %>%
+    html_text()
+names35.1 <- names35.1[3:11] 
+names35.1
+
+#Type of Purchase 
+purchasetype35 <- url35%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+purchasetype35.1 <- url35.1%>%
+    html_nodes("span.a-size-mini.a-color-state.a-text-bold") %>%
+    html_text()
+
+#Date of Reviews
+daterev35 <- url35%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+daterev35.1 <- url35.1%>%
+    html_nodes("span.a-size-base.a-color-secondary.review-date") %>%
+    html_text()
+
+#Individual Ratings 
+rates35 <- url35%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+rates35.1 <- url35.1%>%
+    html_nodes("span.a-icon-alt") %>%
+    html_text()
+
+#Reviews
+reviews35 <- url35%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+reviews35.1 <- url35.1%>%
+    html_nodes("span.a-size-base.review-text.review-text-content") %>%
+    html_text() %>% 
+    gsub("\\n", "", .)
+
+#Data Frames
+dataname35 <- data.frame(
+    ReviewerName = c(names35, names35.1)[1:50]
+)
+
+datapurchaseType35 <- data.frame(
+    TypeOfPurchase = c(purchasetype35, purchasetype35.1)[1:50]
+)
+
+dataDate35 <- data.frame(
+    Date = c(daterev35, daterev35.1)[1:50]
+)
+
+rate35 <- data.frame(
+    IndividualRating = c(rates35, rates35.1)[1:50]
+)
+
+review_dataframe35 <- data.frame(
+    ReviewText = c(reviews35, reviews35.1)[1:50]
+) 
+
+pro35 <- rep(subset24products2[11],50)
+
+combinedProducts35 <- data.frame( 
+    Product = pro35,
+    ReviewerName = dataname35$ReviewerName,
+    TypeOfPurchase = datapurchaseType35$TypeOfPurchase,
+    Date = dataDate35$Date,
+    IndividualRating = rate35$IndividualRating,
+    ReviewText = review_dataframe35$ReviewText
+)
+combinedProducts35
+
+#Product 35 csv
+write.csv(combinedProducts35, file = "35thProduct.csv")
+head(combinedProducts35)
+```
