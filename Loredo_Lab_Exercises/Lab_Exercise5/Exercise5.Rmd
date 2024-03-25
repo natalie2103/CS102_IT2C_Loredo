@@ -1,0 +1,66 @@
+---
+title: "Exercise5"
+author: "Natalie Joy Loredo"
+date: "2024-03-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+Clean Articles
+```{r}
+library(tidyverse)  
+library(stringr)    
+
+#Read the data
+data <- read.csv("unclean_data/DataAnalysis_Articles.csv")
+
+
+clean_cols <- c("Title", "Author", "Subject", "Abstract")  
+#Columns to clean
+for (col in clean_cols) {
+  data[, col] <- str_to_lower(data[, col]) %>%
+                 str_replace_all("\\p{Emoji}", "")
+}
+
+
+data$Meta <- as.Date(data$Meta, format = "%a, %d %b %Y %H:%M:%S UTC")                      
+# Save the cleaned data
+write.csv(data, "clean_data/Data_AnalysisArticles.csv")
+```
+
+Reviews Cleaning 
+```{r}
+#Read the data from the CSV file
+data <- read.csv("unclean_data/2500Reviews.csv")
+
+#Get first 5 rows
+head(data, 5)
+```
+clean reviews data
+```{r}
+library(readr)
+library(stringr)
+library(dplyr)
+```
+
+```{r}
+#Convert date and rating to integer
+Products_Reviews <- data %>%
+  mutate(
+    Date       = as.Date(str_extract(Date, "\\d+\\s[A-Za-z]+\\s\\d+"), format = "%d %b %Y"),
+    IndividualRating    = as.integer(str_extract(IndividualRating, "\\d+\\.\\d+"))
+  )
+
+#Clean columns
+Products_Reviews <- Products_Reviews %>%
+  mutate(across(c(Product, ReviewerName, ReviewText), ~ str_replace_all(.x, "\\p{So}", ""))) %>%  
+#Remove emoticons
+mutate(across(c(Product, ReviewerName, ReviewText), ~ gsub("[^a-zA-Z ]", "", .x))) %>%         
+mutate(across(c(Product, ReviewerName, ReviewText), ~ na_if(.x, "")))                     
+
+Products_Reviews <- Products_Reviews %>%
+mutate(across(where(is.character), tolower))
+write.csv(Products_Reviews, "clean_data/Reviews.csv")
+```
