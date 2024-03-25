@@ -1285,12 +1285,8 @@ productsrev
 CSV
 
 ```{r} 
-
-
 write.csv(productsrev, "250ProductsReviews.csv")
-
 read.csv("250ProductsReviews.csv")
-
 ```
 
 
