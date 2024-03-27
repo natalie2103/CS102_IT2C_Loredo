@@ -2,7 +2,9 @@
 title: "Exercise4.Rmd"
 author: "Natalie Joy Loredo"
 date: "2024-03-25"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -88,9 +90,29 @@ library(dplyr,dbplyr)
 
 connection <- dbConnect(RMySQL::MySQL(),
                         dsn="MariaDB-connection",
-                        Server = "localhost",
-                        dbname = "", 
+                        Server = "data_analysisarticles",
+                        dbname = "data_analysisarticles", 
                         user = "root", 
                         password = "") 
 
+```
+
+```{r eval = FALSE}
+library(readr)
+
+DataAnalysis_Articles <- read.csv("DataAnalysis_Articles.csv")
+head(DataAnalysis_Articles)
+```
+
+```{r,eval = FALSE}
+dbWriteTable(connection, 'Articles', DataAnalysis_Articles, append = TRUE)
+```
+```{r,eval = FALSE}
+dbListTables(connection)
+dbListFields(connection, 'Articles')
+```
+
+```{r,eval = FALSE}
+datas <- dbGetQuery(connection, "SELECT * FROM data_analysisarticles.Articles")
+glimpse(datas)
 ```
