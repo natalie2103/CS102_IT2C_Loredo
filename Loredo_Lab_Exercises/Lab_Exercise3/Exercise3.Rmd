@@ -937,5 +937,45 @@ write.csv(Moviesdf, "IMDBMovies.csv")
 
 read.csv("IMDBMovies.csv")
 ```
+Connect to Database
+```{r}
+library(dplyr,dbplyr)
+library(RMySQL) 
 
+#creating connections
+connection <- dbConnect(RMySQL::MySQL(), 
+                        dsn="MySQL-connection",
+                        Server = "localhost",
+                        dbname = "lab_exercise3", 
+                        user = "root") #PWD is the password of your MySQL
+```
 
+```{r}
+#listing the tables of the sample_db 
+dbListTables(connection)
+```
+```{r}
+library(readr)
+
+movie_df <- read.csv("IMDBMovies.csv")
+```
+
+```{r}
+#Rename the duplicate column
+names(IMDBMovies)[names(IMDBMovies) == 'Textreview'] <- 'TextReviews'
+
+#Write the table to the database
+dbWriteTable(connection, 'movie', IMDBMovies, append = TRUE)
+
+#Read the table to verify
+head(dbReadTable(connection, 'movie'))
+
+```
+```{r}
+#Read and write data from database
+data <- dbGetQuery(connection, "SELECT * FROM movie")
+
+#Export to csv
+write.csv(data [(1:10), ], "movie_data.csv")
+read.csv("movie_data.csv")
+```
